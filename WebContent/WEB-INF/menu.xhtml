@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pu="http://primefaces.org/ultima">
+
+	<h:form id="menuform">
+		<div class="layout-menu #{guestPreferences.menuClass}">
+			<div class="nano">
+				<div class="nano-content menu-scroll-content">
+					<ui:fragment
+						rendered="#{guestPreferences.profileMode == 'inline' and guestPreferences.menuLayout != 'menu-layout-static menu-layout-horizontal'}">
+						<div class="profile">
+							<div>
+								<h:outputText value="#{usuarioCtrl.currentDateObj}">
+									<f:convertDateTime pattern="dd 'de' MMMM 'de' yyyy" />
+								</h:outputText>
+								<br />
+
+							</div>
+							<div align="center">
+								<h:graphicImage value="/img/#{sesionCtrl.usuarioLogueado.foto}"
+									rendered="#{sesionCtrl.usuarioLogueado.foto!=null}"
+									style="width:45px; height:45px;" />
+							</div>
+							<a id="profile-options" href="#"> <span class="profile-name">
+									#{sesionCtrl.usuarioLogueado.nombre}
+									#{sesionCtrl.usuarioLogueado.apellido}</span> <i
+								class="material-icons">&#xE313;</i>
+							</a>
+
+
+						</div>
+
+						<ul id="profile-menu" class="ultima-menu">
+							<li role="menuitem"><a
+								href="#{facesContext.externalContext.requestContextPath}/admin/index.jsp"
+								class="ripplelink"> <i class="material-icons">&#xE8AC;</i> <span>Salir</span>
+							</a></li>
+						</ul>
+					</ui:fragment>
+
+					<pu:menu widgetVar="me">
+						<p:menuitem id="um_dashboard" value="Inicio" icon="&#xE871;"
+							outcome="/paginas/index.jsf" />
+						<p:menuitem id="um_usu" value="Usuarios" icon="&#xE7FD;"
+							outcome="/paginas/usuarios/usuarioLista.jsf" />
+						<p:menuitem id="um_utils" value="Catálogo" icon="&#xE869;"
+							outcome="/paginas/parametros/parametroLista.jsf" />
+						<p:menuitem id="um_mat" value="Materia" icon="&#xE880;"
+							outcome="/paginas/materia/materiaLista.jsf" />
+
+					</pu:menu>
+				</div>
+			</div>
+		</div>
+	</h:form>
+</ui:composition>
