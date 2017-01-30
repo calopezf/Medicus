@@ -5,10 +5,25 @@
 	template="/template/general.xhtml" xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="content">
-		<script
-			src="http://maps.google.com/maps/api/js?key=AIzaSyC_utMGsrbWjkTFthrTR4rfX8khdRgt6S8"
-			type="text/javascript"></script>
+	<style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 100%; }
+    </style>
+     <div id="map"></div>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_utMGsrbWjkTFthrTR4rfX8khdRgt6S8&callback=initMap">
+    </script>
+			
 		<script type="text/javascript">
+		var map;
+		function initMap() {
+		  map = new google.maps.Map(document.getElementById('map'), {
+		    center: {lat: -34.397, lng: 150.644},
+		    zoom: 8
+		  });
+		}
+
+		
 var geocoder;
 
 var tiempo = window.setInterval("myFunction()", 100);
@@ -293,8 +308,6 @@ alert("Geocoder failed");
 			<audio id="audio18" src="sonido/audio18.wav" />
 
 			<br />
-			<p:gmap style="width:100%;height:300px" zoom="18" type="ROADMAP"
-				center="-0.192053, -78.4934" widgetVar="wmap" />
 
 			<br />
 			<br />
