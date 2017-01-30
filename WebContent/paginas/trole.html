@@ -23,7 +23,7 @@ var map;
 // failed.", it means you probably did not give permission for the browser to
 // locate you.
 
-var tiempo = window.setInterval("initMap()", 5000);
+var tiempo = window.setInterval("initMap()", 10000);
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -51,8 +51,6 @@ function initMap() {
          		if(lng > -78.4858){ //mas
          			//window.alert("Entro 3");
           	if(lng < -78.4845){//menos 
-              	//window.alert("Entro 4");
-          		window.alert("Entro 1");
           		document.getElementById('audio1').play();
               }
           	}
@@ -68,9 +66,54 @@ function initMap() {
          		if(lng > -78.486631){ //mas
          			//window.alert("Entro 3");
           	if(lng < -78.486364){//menos 
-              	//window.alert("Entro 4");
-          		window.alert("Entro 1");
-          		document.getElementById('audio1').play();
+          		document.getElementById('audio2').play();
+              }
+          	}
+         	 }
+          }
+
+      
+
+
+      //*********************PARADA ESTADIO*****************
+      if(lat > -0.178157 ){//mas 
+          //	window.alert("Entro 1");
+         	 if(lat < -0.177621){ //menos  
+         		//window.alert("Entro 2");
+         		if(lng > -78.488797){ //mas
+         			//window.alert("Entro 3");
+          	if(lng < -78.488623){//menos 
+          		document.getElementById('audio3').play();
+              }
+          	}
+         	 }
+          }
+
+      
+      //*********************PARADA LA CAROLINA*****************
+      if(lat > -0.182075 ){//mas 
+          //	window.alert("Entro 1");
+         	 if(lat < -0.18112){ //menos  
+         		//window.alert("Entro 2");
+         		if(lng > -78.489952){ //mas
+         			//window.alert("Entro 3");
+          	if(lng < -78.489671){//menos 
+          		document.getElementById('audio4').play();
+              }
+          	}
+         	 }
+          }
+
+
+      //*********************PARADA EL FLORON*****************
+      if(lat > -0.185555 ){//mas 
+          //	window.alert("Entro 1");
+         	 if(lat < -0.184379){ //menos  
+         		//window.alert("Entro 2");
+         		if(lng > -78.491004){ //mas
+         			//window.alert("Entro 3");
+          	if(lng < -78.490643){//menos 
+          		document.getElementById('audio5').play();
               }
           	}
          	 }
@@ -82,8 +125,7 @@ function initMap() {
      	 if(lat < -0.1881 ){//menos 
          		if(lng > -78.4923){ //mas
           		if(lng < -78.4917){//menos 
-          			window.alert("Entro 2");
-          		document.getElementById('audio2').play();
+          		document.getElementById('audio6').play();
                 }
           	}
          	  }
@@ -94,8 +136,7 @@ function initMap() {
       if(lat < -0.1915 ){//menos 
          		if(lng > -78.4933){ //mas
           		if(lng < -78.4930){//menos 
-          			window.alert("Entro 3");
-          		document.getElementById('audio3').play();
+          		document.getElementById('audio7').play();
                 }
           	}
          	  }
@@ -106,8 +147,7 @@ function initMap() {
       if(lat < -0.1975 ){//menos 
          		if(lng > -78.4963){ //mas
           		if(lng < -78.4955){//menos 
-          			window.alert("Entro 4");
-          		document.getElementById('audio4').play();
+          		document.getElementById('audio8').play();
                 }
           	}
          	  }
@@ -118,8 +158,7 @@ function initMap() {
       if(lat < -0.2004 ){//menos 
          		if(lng > -78.4977){ //mas
           		if(!lng < -78.4969){//menos 
-          			window.alert("Entro 5");
-          		document.getElementById('audio5').play();
+          		document.getElementById('audio9').play();
                 }
           	}
          	  }
@@ -130,24 +169,12 @@ function initMap() {
       if(lat < -0.2040 ){//menos 
          		if(lng > -78.4991){ //mas
           		if(lng < -78.4984){//menos 
-          			window.alert("Entro 6");
-          		document.getElementById('audio6').play();
+          		document.getElementById('audio10').play();
                 }
           	}
          	  }
           }
 
-      //*********************PARADA MARISCAL*****************
-       if(lat > -0.2048){ //mas  
-      if(lat < -0.2040 ){//menos 
-         		if(lng > -78.4991){ //mas
-          		if(lng < -78.4984){//menos 
-          			window.alert("Entro 7");
-          		document.getElementById('audio7').play();
-                }
-          	}
-         	  }
-          }
 
       //*********************PARADA EL EJIDO*****************
      
@@ -155,8 +182,7 @@ function initMap() {
       if(lat < -0.2083 ){//menos
          		if(lng > -78.5006){ //mas
           		if(lng < -78.4999){//menos 
-          			window.alert("Entro 8");
-          		document.getElementById('audio8').play();
+          		document.getElementById('audio11').play();
                 }
           	}
          	  }
@@ -168,8 +194,7 @@ function initMap() {
       if(lat < -0.2134 ){//menos 
          		if(lng > -78.5031){ //mas
           		if(lng < -78.5026){//menos 
-          			window.alert("Entro 9");
-          		document.getElementById('audio9').play();
+          		document.getElementById('audio12').play();
                 }
           	}
          	  }
@@ -181,24 +206,37 @@ function initMap() {
       if(lat < -0.2167 ){//menos 
          		if(lng > -78.5054){ //mas
           		if(lng < -78.5050){//menos 
-          			window.alert("Entro 10");
-          		document.getElementById('audio10').play();
+          		document.getElementById('audio13').play();
+                }
+          	}
+         	  }
+          }
+
+
+
+      //*********************PARADA PLAZA DEL TEATRO*****************
+      if(lat > -0.218802){ //mas 
+      if(lat < -0.218536 ){//menos 
+         		if(lng > -78.508921){ //mas
+          		if(lng < -78.508483){//menos 
+          		document.getElementById('audio14').play();
                 }
           	}
          	  }
           }
 
       //*********************PARADA HERMANO MIGUEL*****************
-      if(lat > -0.2180){ //mas 
-      if(lat < -0.2175 ){//menos 
-         		if(lng > -78.5061){ //mas
-          		if(lng < -78.5057){//menos 
-          			window.alert("Entro 11");
-          		document.getElementById('audio11').play();
-                }
-          	}
-         	  }
-          }
+  //    if(lat > -0.2180){ //mas 
+   //   if(lat < -0.2175 ){//menos 
+   //      		if(lng > -78.5061){ //mas
+     //     		if(lng < -78.5057){//menos 
+      //    		document.getElementById('audio11').play();
+        //        }
+       //   	}
+        // 	  }
+       //   }
+       
+
 
 
       //*********************PARADA PLAZA GRANDE*****************
@@ -206,8 +244,7 @@ function initMap() {
       if(lat < -0.2202 ){//menos 
          		if(lng > -78.5110){ //mas
           		if(lng < -78.5105){//menos 
-          			window.alert("Entro 12");
-          		document.getElementById('audio12').play();
+          		document.getElementById('audio15').play();
                 }
           	}
          	  }
@@ -218,20 +255,29 @@ function initMap() {
       if(lat < -0.2232 ){//menos 
          		if(lng > -78.5134){ //mas
           		if(lng < -78.5123){//menos 
-          			window.alert("Entro 13");
-          		document.getElementById('audio13').play();
+          		document.getElementById('audio16').play();
                 }
           	}
          	  }
           }
 
       //*********************PARADA CUMANDA*****************
-      if(lat > -0.2266){ //mas  
-      if(lat < -0.2263 ){//menos 
+      if(lat > -0.226984){ //mas  
+      if(lat < -0.225863 ){//menos 
          		if(lng > -78.5127){ //mas
           		if(lng < -78.5131){//menos 
-          			window.alert("Entro 14");
-          		document.getElementById('audio14').play();
+          		document.getElementById('audio17').play();
+                }
+          	}
+         	  }
+          }
+
+      //*********************PARADA LA RECOLETA*****************
+      if(lat > -0.231241){ //mas  
+      if(lat < -0.230125 ){//menos 
+         		if(lng > -78.51353){ //mas
+          		if(lng < -78.512859){//menos 
+          		document.getElementById('audio18').play();
                 }
           	}
          	  }
@@ -242,20 +288,29 @@ function initMap() {
       if(lat < -0.2235 ){//menos 
          		if(lng > -78.5145){ //mas
           		if(lng < -78.5139){//menos 
-          			window.alert("Entro 15");
-          		document.getElementById('audio15').play();
+          		document.getElementById('audio19').play();
                 }
           	}
          	  }
           }
+
+      //*********************PARADA CHIMBACALLE*****************
+      if(lat > -0.239617){ //mas  
+       if(lat < -0.237724 ){//menos 
+          		if(lng > -78.516942){ //mas
+           		if(lng < -78.516003){//menos 
+           		document.getElementById('audio20').play();
+                 }
+           	}
+          	  }
+           }
 
       //*********************PARADA VILLAFLORA*****************
      if(lat > -0.2451){ //mas  
       if(lat < -0.2439 ){//menos 
          		if(lng > -78.5193){ //mas
           		if(lng < -78.5185){//menos 
-          			window.alert("Entro 16");
-          		document.getElementById('audio16').play();
+          		document.getElementById('audio21').play();
                 }
           	}
          	  }
@@ -266,8 +321,7 @@ function initMap() {
       if(lat < -0.2517 ){//menos 
          		if(lng > -78.5219){ //mas
           		if(lng < -78.5198){//menos 
-          			window.alert("Entro 17");
-          		document.getElementById('audio17').play();
+          		document.getElementById('audio22').play();
                 }
           	}
          	  }
@@ -282,7 +336,7 @@ function initMap() {
              		//	window.alert("Entro 18 3");
               		if(lng < -78.489387){//menos 
               		//	window.alert("Entro 18 4");
-              		document.getElementById('audio18').play();
+              		document.getElementById('audio11').play();
                     }
               	}
              	  }
@@ -297,7 +351,7 @@ function initMap() {
              		//	window.alert("Entro 18 3");
               		if(lng < -78.479126){//menos 
               		//	window.alert("Entro 18 4");
-              		document.getElementById('audio18').play();
+              		document.getElementById('audio11').play();
                     }
               	}
              	  }
@@ -332,24 +386,28 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_utMGsrbWjkTFthrTR4rfX8khdRgt6S8&callback=initMap">
     </script>
-	<audio id="audio1" src="sonido/audio1.wav" />
-	<audio id="audio2" src="sonido/audio2.wav" />
-	<audio id="audio3" src="sonido/audio3.wav" />
-	<audio id="audio4" src="sonido/audio4.wav" />
-	<audio id="audio5" src="sonido/audio5.wav" />
-	<audio id="audio6" src="sonido/audio6.wav" />
-	<audio id="audio7" src="sonido/audio7.wav" />
-	<audio id="audio8" src="sonido/audio8.wav" />
-	<audio id="audio9" src="sonido/audio9.wav" />
-	<audio id="audio1O" src="sonido/audio10.wav" />
-	<audio id="audio11" src="sonido/audio11.wav" />
-	<audio id="audio12" src="sonido/audio12.wav" />
-	<audio id="audio13" src="sonido/audio13.wav" />
-	<audio id="audio14" src="sonido/audio14.wav" />
-	<audio id="audio15" src="sonido/audio15.wav" />
-	<audio id="audio16" src="sonido/audio16.wav" />
-	<audio id="audio17" src="sonido/audio17.wav" />
-	<audio id="audio18" src="sonido/audio18.wav" />
+	<audio id="audio1" src="sonido/audio1.mp3" />
+	<audio id="audio2" src="sonido/audio2.mp3" />
+	<audio id="audio3" src="sonido/audio3.mp3" />
+	<audio id="audio4" src="sonido/audio4.mp3" />
+	<audio id="audio5" src="sonido/audio5.mp3" />
+	<audio id="audio6" src="sonido/audio6.mp3" />
+	<audio id="audio7" src="sonido/audio7.mp3" />
+	<audio id="audio8" src="sonido/audio8.mp3" />
+	<audio id="audio9" src="sonido/audio9.mp3" />
+	<audio id="audio1O" src="sonido/audio10.mp3" />
+	<audio id="audio11" src="sonido/audio11.mp3" />
+	<audio id="audio12" src="sonido/audio12.mp3" />
+	<audio id="audio13" src="sonido/audio13.mp3" />
+	<audio id="audio14" src="sonido/audio14.mp3" />
+	<audio id="audio15" src="sonido/audio15.mp3" />
+	<audio id="audio16" src="sonido/audio16.mp3" />
+	<audio id="audio17" src="sonido/audio17.mp3" />
+	<audio id="audio18" src="sonido/audio18.mp3" />
+	<audio id="audio19" src="sonido/audio19.mp3" />
+	<audio id="audio20" src="sonido/audio20.mp3" />
+	<audio id="audio21" src="sonido/audio21.mp3" />
+	<audio id="audio22" src="sonido/audio22.mp3" />
 </body>
 
 </html>
