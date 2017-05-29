@@ -11,13 +11,16 @@
 				<div class="nano-content menu-scroll-content">
 					<ui:fragment
 						rendered="#{guestPreferences.profileMode == 'inline' and guestPreferences.menuLayout != 'menu-layout-static menu-layout-horizontal'}">
+						<br />
+						<div align="center">
+							<h:graphicImage value="../img/medicus.jpg" 
+								style="width:120px; height:120px;" />
+						</div>
 						<div class="profile">
 							<div>
 								<h:outputText value="#{usuarioCtrl.currentDateObj}">
 									<f:convertDateTime pattern="dd 'de' MMMM 'de' yyyy" />
 								</h:outputText>
-								<br />
-
 							</div>
 							<div align="center">
 								<h:graphicImage value="/img/#{sesionCtrl.usuarioLogueado.foto}"
@@ -26,30 +29,26 @@
 							</div>
 							<a id="profile-options" href="#"> <span class="profile-name">
 									#{sesionCtrl.usuarioLogueado.nombre}
-									#{sesionCtrl.usuarioLogueado.apellido}</span> <i
-								class="material-icons">&#xE313;</i>
+									#{sesionCtrl.usuarioLogueado.apellido}</span> 
 							</a>
 
 
 						</div>
-
-						<ul id="profile-menu" class="ultima-menu">
-							<li role="menuitem"><a
-								href="#{facesContext.externalContext.requestContextPath}/admin/index.jsp"
-								class="ripplelink"> <i class="material-icons">&#xE8AC;</i> <span>Salir</span>
-							</a></li>
-						</ul>
 					</ui:fragment>
 
 					<pu:menu widgetVar="me">
 						<p:menuitem id="um_dashboard" value="Inicio" icon="&#xE871;"
 							outcome="/paginas/index.jsf" />
-						<p:menuitem id="um_usu" value="Usuarios" icon="&#xE7FD;"
+						<p:menuitem id="um_usu" value="Perfil" icon="&#xE7FD;"
 							outcome="/paginas/usuarios/usuarioLista.jsf" />
-						<p:menuitem id="um_utils" value="Catálogo" icon="&#xE869;"
-							outcome="/paginas/parametros/parametroLista.jsf" />
-						<p:menuitem id="um_mat" value="Materia" icon="&#xE880;"
+						<p:menuitem id="um_mat" value="Pacientes" icon="&#xE7FB;"
 							outcome="/paginas/materia/materiaLista.jsf" />
+						<p:menuitem id="um_seg" value="Agenda" icon="&#xE878;"
+							outcome="/paginas/seguimiento/seguimientoLista.jsf" />
+						<p:menuitem id="um_rep" value="Reportes" icon="&#xE5D2;"
+							outcome="/paginas/reporte/reporte.jsf" />
+						<p:menuitem id="um_utils" value="Configuración" icon="&#xE869;"
+							outcome="/paginas/parametros/parametroLista.jsf" />
 
 					</pu:menu>
 				</div>

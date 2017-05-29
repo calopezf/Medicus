@@ -7,6 +7,7 @@ package ec.edu.puce.professorCheck.ctrl;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Inject;
 
 import ec.edu.puce.professorCheck.modelo.Usuario;
 import ec.edu.puce.professorCheck.servicio.ServicioUsuario;
@@ -27,6 +28,7 @@ public class SesionCtrl extends BaseCtrl {
 	private ServicioUsuario usuarioServicio;
 	private Usuario usuarioLogueado;
 
+
 	public void idleListener() {
 		System.out.println("invalida la sesion");
 		// invalidate session
@@ -44,4 +46,4 @@ public class SesionCtrl extends BaseCtrl {
 	public void setUsuarioLogueado(Usuario usuarioLogueado) {
 		this.usuarioLogueado = usuarioLogueado;
 	}
-}
+	}

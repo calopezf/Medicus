@@ -17,15 +17,15 @@ if (navigator.geolocation) {
         clearTimeout(location_timeout);
         var lat = position.coords.latitude;
         var lng = position.coords.longitude;
-        //window.alert("Latitud: "+lat+" Longitud:"+lng);
+        window.alert("Latitud: "+lat+" Longitud:"+lng);
         if(lat &gt; -0.208214 ){
-        	//window.alert("Entro 1");
-       	 if(!lat &gt; -0.2108){   
-       		//window.alert("Entro 2");
+        	window.alert("Entro 1");
+       	 if(lat &gt; -0.2108){   
+       		window.alert("Entro 2");
        		if(lng &gt; -78.49){ 
-       			//window.alert("Entro 3");
-        	if(!lng &gt; -78.2108){ 
-            	//window.alert("Entro 4");
+       			window.alert("Entro 3");
+        	if(lng &gt; -78.2108){ 
+            window.alert("Entro 4");
         	window.alert("Su posición actual no es en la Pontificia Universidad Católica del Ecuador, no puede registrar su clase.");
             window.location.href='http://localhost:8080/ProfessorCheck/paginas/index.jsf';
             }
