@@ -133,22 +133,26 @@ public class UsuarioCtrl extends BaseCtrl {
 					componenteRoles = new DualListModel<String>(rolSource,
 							rolTarget);
 				} else {
-					usuario = getUsuarioLogueado();
-					usuario.setRegistroNuevo(false);
-					List<String> rolTarget = new ArrayList<String>();
-					List<String> rolSource = new ArrayList<String>();
-					for (Rol rol : usuario.getRoles()) {
-						rolTarget.add(rol.getId().toString());
-					}
-					List<Rol> rolesBase = rolServicio.devuelveRolesActivos();
-					for (Rol rol : rolesBase) {
-						if (!rolTarget.contains(rol.getId().toString())) {
-							rolSource.add(rol.getId().toString());
+					if (getUsuarioLogueado() != null) {
+						usuario = getUsuarioLogueado();
+						usuario.setRegistroNuevo(false);
+						List<String> rolTarget = new ArrayList<String>();
+						List<String> rolSource = new ArrayList<String>();
+						for (Rol rol : usuario.getRoles()) {
+							rolTarget.add(rol.getId().toString());
 						}
+						List<Rol> rolesBase = rolServicio
+								.devuelveRolesActivos();
+						for (Rol rol : rolesBase) {
+							if (!rolTarget.contains(rol.getId().toString())) {
+								rolSource.add(rol.getId().toString());
+							}
+						}
+						componenteRoles = new DualListModel<String>(rolSource,
+								rolTarget);
+						setRolesSeleccionados(rolTarget);
 					}
-					componenteRoles = new DualListModel<String>(rolSource,
-							rolTarget);
-					setRolesSeleccionados(rolTarget);
+
 				}
 
 			} else {
