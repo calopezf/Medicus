@@ -13,7 +13,7 @@
 						rendered="#{guestPreferences.profileMode == 'inline' and guestPreferences.menuLayout != 'menu-layout-static menu-layout-horizontal'}">
 						<br />
 						<div align="center">
-							<h:graphicImage value="../img/medicus.jpg" 
+							<h:graphicImage value="/img/medicus.jpg"
 								style="width:120px; height:120px;" />
 						</div>
 						<div class="profile">
@@ -29,7 +29,7 @@
 							</div>
 							<a id="profile-options" href="#"> <span class="profile-name">
 									#{sesionCtrl.usuarioLogueado.nombre}
-									#{sesionCtrl.usuarioLogueado.apellido}</span> 
+									#{sesionCtrl.usuarioLogueado.apellido}</span>
 							</a>
 
 
@@ -37,17 +37,28 @@
 					</ui:fragment>
 
 					<pu:menu widgetVar="me">
+						<p:menuitem id="um_usuA" value="Usuarios" icon="&#xE7FD;"
+							rendered="#{usuarioCtrl.administrador}"
+							outcome="/paginas/usuarios/usuarioLista.jsf" />
+						<p:menuitem id="um_conf" value="Configuración" icon="&#xE869;"
+							rendered="#{usuarioCtrl.administrador}"
+							outcome="/paginas/parametros/parametroLista.jsf" />
 						<p:menuitem id="um_dashboard" value="Inicio" icon="&#xE871;"
 							outcome="/paginas/index.jsf" />
 						<p:menuitem id="um_usu" value="Perfil" icon="&#xE7FD;"
-							outcome="/paginas/usuarios/usuarioLista.jsf" />
+							rendered="#{usuarioCtrl.doctor}"
+							outcome="/paginas/usuarios/usuario.jsf" />
 						<p:menuitem id="um_mat" value="Pacientes" icon="&#xE7FB;"
+							rendered="#{usuarioCtrl.doctor}"
 							outcome="/paginas/materia/materiaLista.jsf" />
 						<p:menuitem id="um_seg" value="Agenda" icon="&#xE878;"
+							rendered="#{usuarioCtrl.doctor}"
 							outcome="/paginas/seguimiento/seguimientoLista.jsf" />
 						<p:menuitem id="um_rep" value="Reportes" icon="&#xE5D2;"
+							rendered="#{usuarioCtrl.doctor}"
 							outcome="/paginas/reporte/reporte.jsf" />
 						<p:menuitem id="um_utils" value="Configuración" icon="&#xE869;"
+							rendered="#{usuarioCtrl.doctor}"
 							outcome="/paginas/parametros/parametroLista.jsf" />
 
 					</pu:menu>

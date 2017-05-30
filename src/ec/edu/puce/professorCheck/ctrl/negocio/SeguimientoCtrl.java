@@ -53,28 +53,7 @@ public class SeguimientoCtrl extends BaseCtrl {
 		this.seguimientoFiltro.setMateria(new Materia());
 		this.seguimientoFiltro.setSemestre(new Parametro());
 		this.seguimientoFiltro.setCarrera(new Parametro());
-		if (isAlumno() && !isAdministrador()) {
-			this.seguimientoFiltro.setAlumno(getUsuarioLogueado());
-		} else {
-			this.seguimientoFiltro.setAlumno(new Usuario());
-		}
-		if (isProfesor() && !isCoordinador() && !isDirector()
-				&& !isAdministrador()) {
-			this.seguimientoFiltro.setProfesor(getUsuarioLogueado());
-		} else {
-			this.seguimientoFiltro.setProfesor(new Usuario());
-		}
-		if (isCoordinador() && !isDirector() && !isAdministrador()) {
-			this.seguimientoFiltro.setCoordinador(getUsuarioLogueado());
-		} else {
-			this.seguimientoFiltro.setCoordinador(new Usuario());
-		}
-		if (isDirector() && !isAdministrador()) {
-			this.seguimientoFiltro.setDirector(getUsuarioLogueado());
-		} else {
-			this.seguimientoFiltro.setDirector(new Usuario());
-		}
-
+	
 		this.profesorLista = new ArrayList<Usuario>();
 		this.alumnoLista = new ArrayList<Usuario>();
 		this.coordinadorLista = new ArrayList<Usuario>();

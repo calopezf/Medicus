@@ -119,18 +119,38 @@ public class UsuarioCtrl extends BaseCtrl {
 		if (usuario == null) {
 			String usuarioId = getHttpServletRequestParam("idUsuario");
 			if (usuarioId == null) {
-				usuario = new Usuario();
-				usuario.setRegistroNuevo(true);
-				usuario.setRoles(new ArrayList<Rol>());
-				usuario.setReferencia(new Parametro());
-				List<String> rolTarget = new ArrayList<String>();
-				List<String> rolSource = new ArrayList<String>();
-				List<Rol> rolesBase = rolServicio.devuelveRolesActivos();
-				for (Rol rol : rolesBase) {
-					rolSource.add(rol.getId().toString());
+				if (isAdministrador()) {
+					usuario = new Usuario();
+					usuario.setRegistroNuevo(true);
+					usuario.setRoles(new ArrayList<Rol>());
+					usuario.setReferencia(new Parametro());
+					List<String> rolTarget = new ArrayList<String>();
+					List<String> rolSource = new ArrayList<String>();
+					List<Rol> rolesBase = rolServicio.devuelveRolesActivos();
+					for (Rol rol : rolesBase) {
+						rolSource.add(rol.getId().toString());
+					}
+					componenteRoles = new DualListModel<String>(rolSource,
+							rolTarget);
+				} else {
+					usuario = getUsuarioLogueado();
+					usuario.setRegistroNuevo(false);
+					List<String> rolTarget = new ArrayList<String>();
+					List<String> rolSource = new ArrayList<String>();
+					for (Rol rol : usuario.getRoles()) {
+						rolTarget.add(rol.getId().toString());
+					}
+					List<Rol> rolesBase = rolServicio.devuelveRolesActivos();
+					for (Rol rol : rolesBase) {
+						if (!rolTarget.contains(rol.getId().toString())) {
+							rolSource.add(rol.getId().toString());
+						}
+					}
+					componenteRoles = new DualListModel<String>(rolSource,
+							rolTarget);
+					setRolesSeleccionados(rolTarget);
 				}
-				componenteRoles = new DualListModel<String>(rolSource,
-						rolTarget);
+
 			} else {
 				usuario = usuarioServicio.obtieneUsuarioXCedula(usuarioId);
 				usuario.setRegistroNuevo(false);
@@ -141,7 +161,7 @@ public class UsuarioCtrl extends BaseCtrl {
 				}
 				List<Rol> rolesBase = rolServicio.devuelveRolesActivos();
 				for (Rol rol : rolesBase) {
-					if(!rolTarget.contains(rol.getId().toString())){
+					if (!rolTarget.contains(rol.getId().toString())) {
 						rolSource.add(rol.getId().toString());
 					}
 				}
@@ -179,30 +199,30 @@ public class UsuarioCtrl extends BaseCtrl {
 	public String guardar() {
 
 		try {
-			if (validadorDeCedula(this.usuario.getIdentificacion())) {
-				// pone los roles seleccionados
-				List<Rol> rolesXUsuario = new ArrayList<Rol>();
-				Rol rolNuevo;
-				for (String id : getComponenteRoles().getTarget()) {
-					rolNuevo = servicioCrud.findById(id, Rol.class);
-					rolesXUsuario.add(rolNuevo);
-				}
-				usuario.setRoles(rolesXUsuario);
-				Usuario usuarioEnBase = usuarioServicio
-						.obtieneUsuarioXCedula(usuario.getIdentificacion());
-				if (usuarioEnBase.getIdentificacion() == null) {
-					this.usuario.setPassword(this.usuario.getIdentificacion());
-					servicioCrud.insert(this.usuario);
-				} else {
-					servicioCrud.update(this.usuario);
-				}
-				System.out.println("guardado...");
-				String m = getBundleMensajes("registro.guardado.correctamente",
-						null);
-				addInfoMessage(m, m);
-			} else {
-				return null;
+			// if (validadorDeCedula(this.usuario.getIdentificacion())) {
+			// pone los roles seleccionados
+			List<Rol> rolesXUsuario = new ArrayList<Rol>();
+			Rol rolNuevo;
+			for (String id : getComponenteRoles().getTarget()) {
+				rolNuevo = servicioCrud.findById(id, Rol.class);
+				rolesXUsuario.add(rolNuevo);
 			}
+			usuario.setRoles(rolesXUsuario);
+			Usuario usuarioEnBase = usuarioServicio
+					.obtieneUsuarioXCedula(usuario.getIdentificacion());
+			if (usuarioEnBase.getIdentificacion() == null) {
+				this.usuario.setPassword(this.usuario.getIdentificacion());
+				servicioCrud.insert(this.usuario);
+			} else {
+				servicioCrud.update(this.usuario);
+			}
+			System.out.println("guardado...");
+			String m = getBundleMensajes("registro.guardado.correctamente",
+					null);
+			addInfoMessage(m, m);
+			// } else {
+			// return null;
+			// }
 		} catch (Exception e) {
 			// e.printStackTrace();
 			String m = getBundleMensajes("registro.noguardado.exception",
