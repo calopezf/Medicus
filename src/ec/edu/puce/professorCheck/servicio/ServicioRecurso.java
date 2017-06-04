@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 @LocalBean
 public class ServicioRecurso {
     
-    @Resource(mappedName = "java:jboss/datasources/professorCheckDS")
+    @Resource(mappedName = "java:jboss/datasources/medicusDS")
     private DataSource dataSource;
 
     @TransactionAttribute(TransactionAttributeType.NEVER)

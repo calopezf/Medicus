@@ -28,7 +28,7 @@ public abstract class CrudServiceCore extends CrudServiceImpl {
     /**
      * Objeto que maneja las operaciones de persistencia.
      */
-    @PersistenceContext(name = "professorCheckDS")
+    @PersistenceContext(name = "medicusDS")
     private EntityManager punit;
 
     /**
