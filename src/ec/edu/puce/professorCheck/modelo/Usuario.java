@@ -47,9 +47,9 @@ public class Usuario implements Serializable {
 	private String email;
 	@Column(name = "foto", length = 4000)
 	private String foto;
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "especialidad", referencedColumnName = "codigo")
-	private Parametro especialidad;
+//	@ManyToOne(optional = false)
+//	@JoinColumn(name = "especialidad", referencedColumnName = "codigo")
+//	private Parametro especialidad;
 	@Transient
 	private boolean tachado;
 	@Transient
@@ -175,13 +175,13 @@ public class Usuario implements Serializable {
 		this.foto = foto;
 	}
 
-	public Parametro getEspecialidad() {
-		return especialidad;
-	}
-
-	public void setEspecialidad(Parametro especialidad) {
-		this.especialidad = especialidad;
-	}
+//	public Parametro getEspecialidad() {
+//		return especialidad;
+//	}
+//
+//	public void setEspecialidad(Parametro especialidad) {
+//		this.especialidad = especialidad;
+//	}
 
 	@Override
 	public String toString() {

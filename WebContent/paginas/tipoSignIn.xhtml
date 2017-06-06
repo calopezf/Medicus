@@ -42,22 +42,25 @@ body {
 </h:head>
 
 <h:body styleClass="login-body">
+	<h:form id="formBoton">
+		<div align="center" >
+			<p:commandButton action="/paginas/login?faces-redirect=true"
+				value="Regresar LogIn" styleClass="primary" />
+		</div>
+	</h:form>
 	<h:form id="formTabla">
-
-		<br />
 		<table style="width: 100%">
 			<tr>
 				<th><div class="login-block">
-						<a href="http://www.facebook.com"> <img
-							src="../img/medico.jpg" width="400px" height="400px" />
-						</a> <br /> <br />
+						<img src="../img/medico.jpg" width="400px" height="400px" /> <br />
+						<br />
 						<p:commandButton onclick="PF('dlg2').show();"
 							value="Regístrate como Médico" styleClass="secondary" />
 					</div></th>
+				<th><div></div></th>
 				<th><div class="login-block">
-						<a href="http://www.facebook.com"> <img
-							src="../img/paciente.jpg" width="400px" height="400px" />
-						</a> <br /> <br />
+						<img src="../img/paciente.jpg" width="400px" height="400px" /> <br />
+						<br />
 						<p:commandButton onclick="PF('dlg1').show();"
 							value="Regístrate como Paciente" styleClass="secondary" />
 					</div></th>
@@ -192,6 +195,7 @@ body {
 					<h:graphicImage value="../img/tappslogo.png" title="Tapps"
 						style="width:300px; height:120px;" />
 				</div></th>
+
 			<th><h:form id="formRedes">
 
 					<font size="4" color="black">Búscanos en:</font>

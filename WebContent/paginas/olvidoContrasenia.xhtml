@@ -27,13 +27,13 @@
 				<p:growl id="growl" autoUpdate="true" />
 
 				<!-- Begin Right Column -->
-				<h:outputText value="#{etiquetas['ingreso.cedula']}" />
+				<h:outputText value="#{etiquetas['ingresoCorreo']}" />
 				<h:panelGrid columns="2" styleClass="form-label,form-input">
-					<p:outputLabel value="#{etiquetas['usuario']}*:" />
+					<p:outputLabel value="#{etiquetas['correoElectronico']}*:" />
 
-					<p:inputText id="cedula"
-						value="#{usuarioCtrl.usuario.identificacion}" required="true"
-						requiredMessage="#{etiquetas['numero.cedula']} #{mensajes['requerido.masculino']}"
+					<p:inputText id="correo"
+						value="#{usuarioCtrl.usuario.email}" required="true"
+						requiredMessage="#{etiquetas['correoElectronico']} #{mensajes['requerido.masculino']}"
 						maxlength="10">
 					</p:inputText>
 					<br />
