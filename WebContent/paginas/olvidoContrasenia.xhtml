@@ -36,17 +36,18 @@
 						requiredMessage="#{etiquetas['numero.cedula']} #{mensajes['requerido.masculino']}"
 						maxlength="10">
 					</p:inputText>
-					<br/>
-					<br/>
-					<br/>
+					<br />
+					<br />
+					<br />
 				</h:panelGrid>
 				<h:panelGrid columns="2"
 					style="text-align: center;width:100%;font-size:12px">
 					<p:commandButton value="#{etiquetas['enviar']}"
 						action="#{usuarioCtrl.enviaContraseniaNueva}" update="@form" />
-						<p:commandButton value="Regresar"
-						action="/paginas/login?faces-redirect=true" immediate="true" update="@form" process="@this" />
-			
+					<p:commandButton value="Regresar"
+						action="/paginas/login?faces-redirect=true" immediate="true"
+						update="@form" process="@this" />
+
 				</h:panelGrid>
 
 

@@ -47,6 +47,9 @@ public class Usuario implements Serializable {
 	private String email;
 	@Column(name = "foto", length = 4000)
 	private String foto;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "especialidad", referencedColumnName = "codigo")
+	private Parametro especialidad;
 	@Transient
 	private boolean tachado;
 	@Transient
@@ -170,6 +173,14 @@ public class Usuario implements Serializable {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	public Parametro getEspecialidad() {
+		return especialidad;
+	}
+
+	public void setEspecialidad(Parametro especialidad) {
+		this.especialidad = especialidad;
 	}
 
 	@Override

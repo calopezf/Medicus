@@ -8,9 +8,7 @@
 <title>SYLLABUS</title>
 <style>
 body {
-	background:
-		url('../img/pucelogin.jpg') 
-		no-repeat fixed center center;
+	background: url('../img/login.jpg') no-repeat fixed center center;
 	background-size: cover;
 	font-family: Montserrat;
 }
@@ -23,12 +21,13 @@ body {
 }
 
 .login-block {
-	width: 320px;
-	padding: 20px;
+	width: 400px;
+	height: 500px;
 	background: #fff;
-	border-radius: 5px;
+	border-radius: 50px;
 	border-top: 5px solid #354d9b;
 	margin: 0 auto;
+	overflow: hidden;
 }
 
 .login-block h1 {
@@ -42,7 +41,7 @@ body {
 
 .login-block input {
 	width: 100%;
-	height: 42px;
+	height: 50px;
 	box-sizing: border-box;
 	border-radius: 5px;
 	border: 1px solid #ccc;
@@ -52,73 +51,29 @@ body {
 	padding: 0 20px 0 50px;
 	outline: none;
 }
-
-.login-block input#username {
-	background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px top
-		no-repeat;
-	background-size: 16px 80px;
-}
-
-.login-block input#username:focus {
-	background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px bottom
-		no-repeat;
-	background-size: 16px 80px;
-}
-
-.login-block input#password {
-	background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px top
-		no-repeat;
-	background-size: 16px 80px;
-}
-
-.login-block input#password:focus {
-	background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px bottom
-		no-repeat;
-	background-size: 16px 80px;
-}
-
-.login-block input:active, .login-block input:focus {
-	border: 1px solid #aed0ea;
-}
-
-.login-block button {
-	width: 100%;
-	height: 40px;
-	background: #354d9b;
-	box-sizing: border-box;
-	border-radius: 5px;
-	border: 1px solid #354d9b;
-	color: #fff;
-	font-weight: bold;
-	text-transform: uppercase;
-	font-size: 14px;
-	font-family: Montserrat;
-	outline: none;
-	cursor: pointer;
-}
-
-.login-block button:hover {
-	background: #354d9b;
-}
 </style>
 </head>
 
 <body>
-
 	<form action="j_security_check" method="post">
-		<div class="logo"></div>
-		<div class="login-block">
-			<h1>SYLLABUS</h1>
-			<input type="text" name="j_username" placeholder="Username"
-				id="username" /> <input type="password" name="j_password"
-				placeholder="Password" id="password" />
-			</h:outputLink>
-			<button>Entrar</button>
-			<br/>
-			<div align="center">
-				<a href="/Syllabus/paginas/olvidoContrasenia.jsf" style="font-size: 12px;">Olvidó su Contraseña?</a>
-			</div>
-		</div>
+		
+		<table style="width: 100%">
+			<tr>
+				<th><div class="login-block">
+						<a href="http://www.facebook.com"> <img
+							src="../img/medico.jpg" width="400px" height="500px" />
+						</a><br/> <font size="20" color="black">Búscanos en:</font>
+					</div></th>
+				<th><div class="login-block">
+						<a href="http://www.facebook.com"> <img
+							src="../img/paciente.jpg" width="450px" height="500px" />
+						</a> Registrate como Paciente
+					</div></th>
+			</tr>
+		</table>
+
+
+
 	</form>
 </body>
 
