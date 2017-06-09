@@ -58,10 +58,12 @@ public class UsuarioCtrl extends BaseCtrl {
 	private List<Usuario> usuarios;
 	private List<Parametro> referenciaLista;
 	private DualListModel<String> componenteRoles;
+	private List<Parametro> nivelLista;
 
 	@PostConstruct
 	public void postConstructor() {
 		this.usuarioFiltro = new Usuario();
+
 	}
 
 	private String destination = "C:\\Java\\wildfly-8.2.1.Final\\standalone\\deployments\\professorCheck.war\\img\\";
@@ -151,6 +153,20 @@ public class UsuarioCtrl extends BaseCtrl {
 						componenteRoles = new DualListModel<String>(rolSource,
 								rolTarget);
 						setRolesSeleccionados(rolTarget);
+					} else {
+						usuario = new Usuario();
+						usuario.setRegistroNuevo(true);
+						usuario.setRoles(new ArrayList<Rol>());
+						usuario.setReferencia(new Parametro());
+						List<String> rolTarget = new ArrayList<String>();
+						List<String> rolSource = new ArrayList<String>();
+						List<Rol> rolesBase = rolServicio
+								.devuelveRolesActivos();
+						for (Rol rol : rolesBase) {
+							rolSource.add(rol.getId().toString());
+						}
+						componenteRoles = new DualListModel<String>(rolSource,
+								rolTarget);
 					}
 
 				}

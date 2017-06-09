@@ -4,7 +4,30 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
+<style>
+body {
+	background: url('../img/login.jpg') no-repeat fixed center center;
+	background-size: cover;
+	font-family: Montserrat;
+}
 
+.logo {
+	width: 213px;
+	height: 36px;
+	background: url('img/tapps.png') no-repeat;
+	margin: 30px auto;
+}
+
+.login-block {
+	width: 400px;
+	height: 500px;
+	background: #fff;
+	border-radius: 50px;
+	border-top: 5px solid #354d9b;
+	margin: 0 auto;
+	overflow: hidden;
+}
+</style>
 <h:head>
 	<f:facet name="first">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -19,51 +42,35 @@
 </h:head>
 
 <h:body styleClass="login-body">
-	<div class="card login-panel ui-fluid">
-		<div class="ui-g-16">
-			<div class="ui-g-12">
-				<h:graphicImage value="../img/medicus.jpg" title="Usuarios"
-					style="width:100px; height:100px;" />
-			</div>
-			<h:form id="login" onsubmit="action='j_security_check';"
-				prependId="false">
-				<label>Usuario</label>
-				<div class="ui-g-12">
-					<h:panelGroup styleClass="md-inputfield">
-						<p:inputText id="j_username" />
-					</h:panelGroup>
-				</div>
-				<div class="ui-g-12">
-					<label>Contraseña</label>
-					<h:panelGroup styleClass="md-inputfield">
-						<p:password id="j_password" />
-					</h:panelGroup>
-				</div>
-				<div class="ui-g-12">
-					<h:panelGrid columns="1" class="ui-g-12">
-						<p:commandButton id="submit" value="Entrar" 
-							ajax="false" styleClass="primary" />
-						<p:commandButton action="/paginas/tipoSignIn?faces-redirect=true"
-							value="Registrarse"  styleClass="secondary" />
-						<p:commandLink id="ajax" process="@this"
-							action="/paginas/olvidoContrasenia?faces-redirect=true">
-							<h:outputText value="Olvidó su Contraseña?" />
-						</p:commandLink>
-					</h:panelGrid>
-				</div>
-			</h:form>
-		</div>
-	</div>
+
+<br />
+	<table style="width: 100%">
+		<tr>
+			<th colspan="2"><div class="login-block">
+					<a href="http://www.facebook.com"> <img src="../img/medico.jpg"
+						width="400px" height="400px" />
+					</a> <br /> <br />
+					<p:commandButton action="/paginas/tipoSignIn?faces-redirect=true"
+						value="Regístrate como Médico" styleClass="secondary"  />
+				</div></th>
+			<th><div class="login-block">
+					<a href="http://www.facebook.com"> <img
+						src="../img/paciente.jpg" width="400px" height="400px" />
+					</a> <br /> <br />
+					<p:commandButton action="/paginas/tipoSignIn?faces-redirect=true"
+						value="Regístrate como Paciente" styleClass="secondary" />
+				</div></th>
+		</tr>
+	</table>
+
 	<h:outputStylesheet name="css/ripple.css" library="ultima-layout" />
 	<h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css"
 		library="ultima-layout" />
-	<table style="width: 100%">
+		<table style="width: 100%">
 		<tr>
 			<th><div align="left">
 					<h:graphicImage value="../img/tappslogo.png" title="Tapps"
 						style="width:300px; height:120px;" />
-
-
 				</div></th>
 			<th><h:form id="formRedes">
 
@@ -81,7 +88,6 @@
 				</h:form></th>
 		</tr>
 	</table>
-
 </h:body>
 
 
