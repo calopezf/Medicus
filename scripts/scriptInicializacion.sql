@@ -17,3 +17,9 @@ INSERT INTO public.usuario(
 INSERT INTO public.usuario_rol(
             rol_id, email)
     VALUES ('ADMINISTRADOR','calopezf@gmail.com');
+INSERT INTO public.usuario(
+            identificacion, apellido, direccion, email, estado, nombre, password)
+    VALUES ('1721930442', 'CORONEL', 'CONOCOTO', 'jvrcoronel@gmail.com', 'ACT', 'JAVIER', '1721930442');
+INSERT INTO public.usuario_rol(
+            rol_id, email)
+    VALUES ('DOCTOR','jvrcoronel@gmail.com');    
