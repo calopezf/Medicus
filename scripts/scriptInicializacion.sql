@@ -15,5 +15,5 @@ INSERT INTO public.usuario(
             identificacion, apellido, direccion, email, estado, nombre, password)
     VALUES ('1010101010', 'LOPEZ', '12 de octubre', 'calopezf@gmail.com', 'ACT', 'CRISTIAN', '1010101010');
 INSERT INTO public.usuario_rol(
-            rol_id, usuario_identificacion)
-    VALUES ('ADMINISTRADOR','1010101010');
+            rol_id, email)
+    VALUES ('ADMINISTRADOR','calopezf@gmail.com');

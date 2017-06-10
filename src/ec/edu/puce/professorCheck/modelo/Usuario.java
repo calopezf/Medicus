@@ -27,6 +27,8 @@ public class Usuario implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
+	@Column(name = "email", length = 200)
+	private String email;
 	@Column(name = "identificacion", length = 20)
 	private String identificacion;// o username
 	@Column(name = "nombre", nullable = false, length = 200)
@@ -43,8 +45,6 @@ public class Usuario implements Serializable {
 	private Parametro referencia;
 	@Column(name = "password", length = 64)
 	private String password;
-	@Column(name = "email", length = 64)
-	private String email;
 	@Column(name = "foto", length = 4000)
 	private String foto;
 //	@ManyToOne(optional = false)
@@ -59,7 +59,7 @@ public class Usuario implements Serializable {
 	// @ManyToMany(mappedBy = "usuarios")
 	// private List<Rol> roles;
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "usuario_rol", joinColumns = { @JoinColumn(name = "usuario_identificacion", referencedColumnName = "identificacion") }, inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"))
+	@JoinTable(name = "usuario_rol", joinColumns = { @JoinColumn(name = "email", referencedColumnName = "email") }, inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"))
 	private List<Rol> roles;
 
 	// @ManyToOne(optional = false)

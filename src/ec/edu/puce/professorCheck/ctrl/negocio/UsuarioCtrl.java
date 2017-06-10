@@ -343,7 +343,7 @@ public class UsuarioCtrl extends BaseCtrl {
 	public void enviaContraseniaNueva() {
 		try {
 			Usuario usuarioRecuperado = servicioCrud.findByPK(
-					usuario.getIdentificacion(), Usuario.class);
+					usuario.getEmail(), Usuario.class);
 			if (usuarioRecuperado == null) {
 				throw new NoSuchAlgorithmException();
 			}

@@ -56,6 +56,19 @@ private EmailServicio emailServicio;
     	}
     }
     
+    public Usuario obtieneUsuarioXEmail(String email) {
+    	Usuario usu=new Usuario();
+    	usu.setEmail(email);
+    	List<Usuario> usuarios=this.servicioCrud.findOrder(usu);
+    	
+    	if(usuarios!=null && !usuarios.isEmpty()){
+    		return usuarios.get(0);
+    	}else {
+    		return new Usuario();
+    	}
+    }
+    
+    
 
     public void enviaMailCambioClave(Usuario usuario) {
         StringBuffer txt = new StringBuffer(200);
