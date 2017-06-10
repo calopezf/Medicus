@@ -335,7 +335,9 @@
   padding: 50px 20px;
   margin: 100px auto 0 auto; }
   .login-panel .ui-g .ui-g-12 {
-    padding: 25px 40px; }
+    padding: 25px 40px;
+    opacity: 0.6;
+    filter: alpha(opacity=60); }
     .login-panel .ui-g .ui-g-12 .ui-button {
       margin-bottom: 20px; }
 

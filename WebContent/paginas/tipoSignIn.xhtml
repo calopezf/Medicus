@@ -24,6 +24,8 @@ body {
 	background: #fff;
 	border-radius: 50px;
 	border-top: 5px solid #354d9b;
+	opacity: 0.6;
+    filter: alpha(opacity=60);
 	margin: 0 auto;
 	overflow: hidden;
 }
@@ -41,7 +43,7 @@ body {
 	<h:outputScript name="js/layout.js" library="ultima-layout" />
 </h:head>
 
-<h:body styleClass="login-body">
+<h:body >
 	<h:form id="formBoton">
 		<div align="center" >
 			<p:commandButton action="/paginas/login?faces-redirect=true"
@@ -69,8 +71,7 @@ body {
 		</table>
 	</h:form>
 
-	<p:dialog widgetVar="dlg2" modal="true" height="500" width="700"
-		showEffect="shake">
+	<p:dialog widgetVar="dlg2" modal="true" height="500" width="700">
 		<h:form id="formUsuarioMedico">
 			<h1>Médico</h1>
 			<p:growl id="growl" autoUpdate="true" />
@@ -131,8 +132,7 @@ body {
 		</h:form>
 	</p:dialog>
 
-	<p:dialog widgetVar="dlg1" modal="true" height="500" width="700"
-		showEffect="shake">
+	<p:dialog widgetVar="dlg1" modal="true" height="500" width="700">
 		<h:form id="formUsuarioPaciente">
 			<h1>Paciente</h1>
 			<p:growl id="growl" autoUpdate="true" />
@@ -189,29 +189,6 @@ body {
 	<h:outputStylesheet name="css/ripple.css" library="ultima-layout" />
 	<h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css"
 		library="ultima-layout" />
-	<table style="width: 100%">
-		<tr>
-			<th><div align="left">
-					<h:graphicImage value="../img/tappslogo.png" title="Tapps"
-						style="width:300px; height:120px;" />
-				</div></th>
-
-			<th><h:form id="formRedes">
-
-					<font size="4" color="black">Búscanos en:</font>
-
-					<a href="http://www.facebook.com"> <img
-						src="../img/facebook-b.png" width="30px" height="30px" />
-					</a>
-					<a href="http://www.twitter.com"> <img
-						src="../img/twitter-b.png" width="30px" height="30px" />
-					</a>
-					<a href="https://plus.google.com/?hl=es"> <img
-						src="../img/google-b.png" width="30px" height="30px" />
-					</a>
-				</h:form></th>
-		</tr>
-	</table>
 </h:body>
 
 
