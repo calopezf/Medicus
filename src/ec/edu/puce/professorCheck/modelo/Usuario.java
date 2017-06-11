@@ -40,16 +40,13 @@ public class Usuario implements Serializable {
 	private EnumEstado estado;
 	@Column(name = "direccion", length = 255)
 	private String direccion;
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "referencia", referencedColumnName = "codigo")
-	private Parametro referencia;
 	@Column(name = "password", length = 64)
 	private String password;
 	@Column(name = "foto", length = 4000)
 	private String foto;
-//	@ManyToOne(optional = false)
-//	@JoinColumn(name = "especialidad", referencedColumnName = "codigo")
-//	private Parametro especialidad;
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "especialidad", referencedColumnName = "codigo", nullable = true)
+	private Parametro especialidad;
 	@Transient
 	private boolean tachado;
 	@Transient
@@ -61,18 +58,8 @@ public class Usuario implements Serializable {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "usuario_rol", joinColumns = { @JoinColumn(name = "email", referencedColumnName = "email") }, inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"))
 	private List<Rol> roles;
-
-	// @ManyToOne(optional = false)
-	// @JoinColumn(name = "institucion_id", referencedColumnName = "id")
-	// private Institucion institucion;
-
-	// public Institucion getInstitucion() {
-	// return institucion;
-	// }
-	//
-	// public void setInstitucion(Institucion institucion) {
-	// this.institucion = institucion;
-	// }
+	@Transient
+	private String confirmaPassword;
 
 	public List<Rol> getRoles() {
 		return roles;
@@ -159,14 +146,6 @@ public class Usuario implements Serializable {
 		this.tachado = tachado;
 	}
 
-	public Parametro getReferencia() {
-		return referencia;
-	}
-
-	public void setReferencia(Parametro referencia) {
-		this.referencia = referencia;
-	}
-
 	public String getFoto() {
 		return foto;
 	}
@@ -175,13 +154,21 @@ public class Usuario implements Serializable {
 		this.foto = foto;
 	}
 
-//	public Parametro getEspecialidad() {
-//		return especialidad;
-//	}
-//
-//	public void setEspecialidad(Parametro especialidad) {
-//		this.especialidad = especialidad;
-//	}
+	public Parametro getEspecialidad() {
+		return especialidad;
+	}
+
+	public void setEspecialidad(Parametro especialidad) {
+		this.especialidad = especialidad;
+	}
+
+	public String getConfirmaPassword() {
+		return confirmaPassword;
+	}
+
+	public void setConfirmaPassword(String confirmaPassword) {
+		this.confirmaPassword = confirmaPassword;
+	}
 
 	@Override
 	public String toString() {

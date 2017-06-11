@@ -45,30 +45,21 @@
 						<f:facet name="header">
 							<h:outputText value="#{etiquetas['cedula']}" />
 						</f:facet>
-						<h:outputText styleClass="tachado" value="#{item.identificacion}"
-							rendered="#{item.tachado == false}" />
-						<h:outputText value="#{item.identificacion}"
-							rendered="#{item.tachado == true}" />
+						<h:outputText value="#{item.identificacion}" />
 					</p:column>
 					<p:column style="width:150px;">
 						<f:facet name="header">
 							<h:outputText value="#{etiquetas['nombres']}" />
 						</f:facet>
 						<h:outputText value="#{item.nombre}"
-							styleClass="inputUpper tachado"
-							rendered="#{item.tachado == false}" />
-						<h:outputText value="#{item.nombre}" styleClass="inputUpper"
-							rendered="#{item.tachado == true}" />
+							styleClass="inputUpper tachado" />
 					</p:column>
 					<p:column style="width:150px;">
 						<f:facet name="header">
 							<h:outputText value="#{etiquetas['apellidos']}" />
 						</f:facet>
 						<h:outputText value="#{item.apellido}"
-							styleClass="inputUpper tachado"
-							rendered="#{item.tachado == false}" />
-						<h:outputText value="#{item.apellido}" styleClass="inputUpper"
-							rendered="#{item.tachado == true}" />
+							styleClass="inputUpper tachado"/>
 					</p:column>
 					<p:column style="width:100px;">
 						<f:facet name="header">
@@ -85,10 +76,6 @@
 					<p:column headerText="#{etiquetas['correoElectronico']}"
 						style="width:200px;">
 						<h:outputText value="#{item.email}" />
-					</p:column>
-					<p:column headerText="#{etiquetas['ocupacion']}"
-						style="width:200px;">
-						<h:outputText value="#{item.referencia.nombre}" />
 					</p:column>
 					<p:column style="width:70px;" styleClass="columnaCentrada">
 						<f:facet name="header">
