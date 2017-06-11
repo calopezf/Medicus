@@ -61,7 +61,6 @@ public class Usuario implements Serializable {
 	@JoinTable(name = "usuario_rol", joinColumns = { @JoinColumn(name = "email", referencedColumnName = "email") }, inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"))
 	private List<Rol> roles;
 	@Transient
-<<<<<<< HEAD
 	private StreamedContent fotoTransient;
 
 	// @ManyToOne(optional = false)
@@ -75,9 +74,7 @@ public class Usuario implements Serializable {
 	// public void setInstitucion(Institucion institucion) {
 	// this.institucion = institucion;
 	// }
-=======
 	private String confirmaPassword;
->>>>>>> dbdfbb51accc6c6cf2843c5e7b1da4fa57bfcc1d
 
 	public Usuario() {
 	}
