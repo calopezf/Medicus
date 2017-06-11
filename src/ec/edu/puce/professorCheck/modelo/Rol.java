@@ -12,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import ec.edu.puce.professorCheck.constantes.EnumEstado;
+import ec.edu.puce.professorCheck.constantes.EnumRol;
 
 @Entity
 @Table(name = "ROL")
@@ -23,7 +24,8 @@ public class Rol implements Serializable {
 	private static final long serialVersionUID = 7827644225154012814L;
 	@Id
 	@Column(name = "id")
-	private String id;// atado a RolEnum
+	@Enumerated(EnumType.STRING)
+	private EnumRol id;// atado a RolEnum
 	@Column(name = "descripcion", length = 500)
 	private String descripcion;
 	@Column(name = "estado")
@@ -57,7 +59,7 @@ public class Rol implements Serializable {
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public EnumRol getId() {
 		return id;
 	}
 
@@ -65,7 +67,7 @@ public class Rol implements Serializable {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(String id) {
+	public void setId(EnumRol id) {
 		this.id = id;
 	}
 

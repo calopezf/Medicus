@@ -39,9 +39,11 @@
 						<f:validator validatorId="MailValidator" />
 					</p:inputText>
 
-					<p:outputLabel value="#{etiquetas['rol']}*:"  rendered="#{usuarioCtrl.administrador}"/>
-					<p:pickList id="pickList" value="#{usuarioCtrl.componenteRoles}" rendered="#{usuarioCtrl.administrador}"
-						var="roles" itemLabel="#{roles}" itemValue="#{roles}">
+					<p:outputLabel value="#{etiquetas['rol']}*:"
+						rendered="#{usuarioCtrl.administrador}" />
+					<p:pickList id="pickList" value="#{usuarioCtrl.componenteRoles}"
+						rendered="#{usuarioCtrl.administrador}" var="roles"
+						itemLabel="#{roles}" itemValue="#{roles}">
 						<f:ajax event="transfer" render="semestre"
 							listener="#{usuarioCtrl.cambiaRoles}" />
 					</p:pickList>
@@ -54,14 +56,6 @@
 							listener="#{usuarioCtrl.cambiaRoles}" />
 					</p:selectCheckboxMenu-->
 
-					<p:outputLabel value="#{etiquetas['ocupacion']}:*" />
-					<p:selectOneMenu id="semestre" required="true"
-						requiredMessage="#{etiquetas['ocupacion']} #{mensajes['requerido.masculino']}"
-						value="#{usuarioCtrl.usuario.referencia.codigo}"
-						style="width:250px">
-						<f:selectItems value="#{usuarioCtrl.referenciaLista}" var="item"
-							itemLabel="#{item.nombre}" itemValue="#{item.codigo}" />
-					</p:selectOneMenu>
 
 					<p:outputLabel for="estado" value="#{etiquetas['estado']}*:" />
 					<p:selectOneMenu id="estado" value="#{usuarioCtrl.usuario.estado}">

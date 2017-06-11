@@ -58,7 +58,7 @@ public class UsuarioCtrl extends BaseCtrl {
 	private List<Usuario> usuarios;
 	private List<Parametro> referenciaLista;
 	private DualListModel<String> componenteRoles;
-	private List<Parametro> nivelLista;
+	private List<Parametro> especialidadesLista;
 
 	@PostConstruct
 	public void postConstructor() {
@@ -125,7 +125,7 @@ public class UsuarioCtrl extends BaseCtrl {
 					usuario = new Usuario();
 					usuario.setRegistroNuevo(true);
 					usuario.setRoles(new ArrayList<Rol>());
-					usuario.setReferencia(new Parametro());
+					usuario.setEspecialidad(new Parametro());
 					List<String> rolTarget = new ArrayList<String>();
 					List<String> rolSource = new ArrayList<String>();
 					List<Rol> rolesBase = rolServicio.devuelveRolesActivos();
@@ -157,7 +157,7 @@ public class UsuarioCtrl extends BaseCtrl {
 						usuario = new Usuario();
 						usuario.setRegistroNuevo(true);
 						usuario.setRoles(new ArrayList<Rol>());
-						usuario.setReferencia(new Parametro());
+						usuario.setEspecialidad(new Parametro());
 						List<String> rolTarget = new ArrayList<String>();
 						List<String> rolSource = new ArrayList<String>();
 						List<Rol> rolesBase = rolServicio
@@ -252,6 +252,65 @@ public class UsuarioCtrl extends BaseCtrl {
 		}
 
 		return "/paginas/usuarios/usuarioLista";
+	}
+
+	public String guardarPerfilMedico() {
+
+		try {
+			// if (validadorDeCedula(this.usuario.getIdentificacion())) {
+			// pone los roles seleccionados
+			List<Rol> rolesXUsuario = new ArrayList<Rol>();
+			Rol rolNuevo;
+			rolNuevo = servicioCrud.findById("MEDICO", Rol.class);
+			rolesXUsuario.add(rolNuevo);
+			usuario.setRoles(rolesXUsuario);
+			servicioCrud.insert(this.usuario);
+			System.out.println("guardado Medico");
+			String m = getBundleMensajes("registro.guardado.correctamente",
+					null);
+			addInfoMessage(m, m);
+			// } else {
+			// return null;
+			// }
+		} catch (Exception e) {
+			// e.printStackTrace();
+			String m = getBundleMensajes("registro.noguardado.exception",
+					new Object[] { e.getMessage() });
+			addErrorMessage(m, m, null);
+			return null;
+		}
+
+		return "/paginas/login";
+	}
+
+	public String guardarPerfilPaciente() {
+
+
+		try {
+			// if (validadorDeCedula(this.usuario.getIdentificacion())) {
+			// pone los roles seleccionados
+			List<Rol> rolesXUsuario = new ArrayList<Rol>();
+			Rol rolNuevo;
+			rolNuevo = servicioCrud.findById("PACIENTE", Rol.class);
+			rolesXUsuario.add(rolNuevo);
+			usuario.setRoles(rolesXUsuario);
+			servicioCrud.insert(this.usuario);
+			System.out.println("guardado Medico");
+			String m = getBundleMensajes("registro.guardado.correctamente",
+					null);
+			addInfoMessage(m, m);
+			// } else {
+			// return null;
+			// }
+		} catch (Exception e) {
+			// e.printStackTrace();
+			String m = getBundleMensajes("registro.noguardado.exception",
+					new Object[] { e.getMessage() });
+			addErrorMessage(m, m, null);
+			return null;
+		}
+
+		return "/paginas/login";
 	}
 
 	public void validaCedula(AjaxBehaviorEvent event) {
@@ -455,6 +514,23 @@ public class UsuarioCtrl extends BaseCtrl {
 			}
 		}
 		return referenciaLista;
+	}
+
+	public List<Parametro> getEspecialidadesLista() {
+		if (especialidadesLista == null) {
+			especialidadesLista=new ArrayList<Parametro>();
+			Parametro referenciaFiltro = new Parametro();
+			referenciaFiltro.setTipo(EnumTipoParametro.ESPECIALIDAD);
+			referenciaFiltro.setEstado(EnumEstado.ACT);
+			for (Parametro a : servicioCrud.findOrder(referenciaFiltro)) {
+				this.especialidadesLista.add(a);
+			}
+		}
+		return especialidadesLista;
+	}
+
+	public void setEspecialidadesLista(List<Parametro> especialidadesLista) {
+		this.especialidadesLista = especialidadesLista;
 	}
 
 	public void setReferenciaLista(List<Parametro> referenciaLista) {

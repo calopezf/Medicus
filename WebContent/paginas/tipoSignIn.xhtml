@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <style>
 body {
-	background: url('../img/login.jpg') no-repeat fixed center center;
+	background: url('../img/profile.png') no-repeat fixed center center;
 	background-size: cover;
 	font-family: Montserrat;
 }
@@ -19,15 +19,23 @@ body {
 }
 
 .login-block {
-	width: 400px;
-	height: 500px;
+	width: 280px;
+	height: 455px;
 	background: #fff;
-	border-radius: 50px;
-	border-top: 5px solid #354d9b;
-	opacity: 0.6;
-    filter: alpha(opacity=60);
-	margin: 0 auto;
+	border-radius: 5px;
 	overflow: hidden;
+	display: inline-block;
+	margin: 30px;
+}
+
+.login-block2 {
+	width: 280px;
+	height: 455px;
+	background: #fff;
+	border-radius: 5px;
+	overflow: hidden;
+	display: inline-block;
+	margin: 30px;
 }
 </style>
 <h:head>
@@ -43,55 +51,68 @@ body {
 	<h:outputScript name="js/layout.js" library="ultima-layout" />
 </h:head>
 
-<h:body >
+<h:body>
 	<h:form id="formBoton">
-		<div align="center" >
-			<p:commandButton action="/paginas/login?faces-redirect=true"
-				value="Regresar LogIn" styleClass="primary" />
+		<div align="left" style="margin: 30px; display: inline-block;">
+			<h:commandLink action="/paginas/login?faces-redirect=true"
+				title="Regresar a Login">
+				<h:graphicImage value="/img/back.png"
+					style="width:35px; height:35px;" />
+			</h:commandLink>
+		</div>
+		<div align="center">
+			<font size="6" color="white">Seleccione su Perfil</font>
 		</div>
 	</h:form>
-	<h:form id="formTabla">
-		<table style="width: 100%">
-			<tr>
-				<th><div class="login-block">
-						<img src="../img/medico.jpg" width="400px" height="400px" /> <br />
-						<br />
-						<p:commandButton onclick="PF('dlg2').show();"
-							value="Regístrate como Médico" styleClass="secondary" />
-					</div></th>
-				<th><div></div></th>
-				<th><div class="login-block">
-						<img src="../img/paciente.jpg" width="400px" height="400px" /> <br />
-						<br />
-						<p:commandButton onclick="PF('dlg1').show();"
-							value="Regístrate como Paciente" styleClass="secondary" />
-					</div></th>
 
-			</tr>
-		</table>
+
+	<h:form id="formTabla">
+		<div style="text-align: center;">
+			<div class="login-block">
+				<br />
+				<p:commandLink onclick="PF('dlg2').show();">
+					<h:graphicImage value="../img/tipomedico.png" />
+				</p:commandLink>
+				<br />
+				<p:commandButton onclick="PF('dlg2').show();" value="Médico"
+					styleClass="secondary" />
+
+			</div>
+			<div class="login-block2">
+				<br />
+				<p:commandLink onclick="PF('dlg1').show();">
+					<h:graphicImage value="../img/tipopaciente.png" />
+				</p:commandLink>
+				<br />
+				<p:commandButton onclick="PF('dlg1').show();" value="Paciente"
+					styleClass="secondary" />
+			</div>
+		</div>
 	</h:form>
 
-	<p:dialog widgetVar="dlg2" modal="true" height="500" width="700">
+	<p:dialog widgetVar="dlg2" modal="true" height="450" width="600">
 		<h:form id="formUsuarioMedico">
-			<h1>Médico</h1>
+			<div align="center">
+				<font size="6" color="#3F51B5">Médico</font>
+			</div>
 			<p:growl id="growl" autoUpdate="true" />
 			<p:panelGrid columns="2" columnClasses="ui-grid-col-6,ui-grid-col-4"
 				layout="grid" styleClass="ui-panelgrid-blank form-group"
 				style="border:0px none; background-color:transparent;">
 
 				<p:outputLabel value="#{etiquetas['nombres']}*:" />
-				<p:inputText id="nombres" value="#{usuarioCtrl.usuario.nombre}"
+				<p:inputText id="nombres" value="#{usuarioRegistroCtrl.usuario.nombre}"
 					required="true"
 					requiredMessage="#{etiquetas['nombres']} #{mensajes['requerido.masculino']}"
 					maxlength="250" size="25" />
 				<p:outputLabel value="#{etiquetas['apellidos']}*:" />
-				<p:inputText id="apellidos" value="#{usuarioCtrl.usuario.apellido}"
+				<p:inputText id="apellidos" value="#{usuarioRegistroCtrl.usuario.apellido}"
 					required="true"
 					requiredMessage="#{etiquetas['apellidos']} #{mensajes['requerido.masculino']}"
 					maxlength="250" size="25" />
 				<p:outputLabel value="#{etiquetas['correoElectronico']}*:" />
 				<p:inputText id="correoElectronico"
-					value="#{usuarioCtrl.usuario.email}" required="true"
+					value="#{usuarioRegistroCtrl.usuario.email}" required="true"
 					requiredMessage="#{etiquetas['correoElectronico']} #{mensajes['requerido.masculino']}"
 					size="25">
 					<f:validator validatorId="MailValidator" />
@@ -99,18 +120,18 @@ body {
 				<p:outputLabel value="#{etiquetas['especialidad']}*:" />
 				<p:selectOneMenu id="area" required="true"
 					requiredMessage="#{etiquetas['especialidad']} #{mensajes['requerido.masculino']}"
-					value="#{materiaCtrl.materia.area.codigo}" style="width:250px">
-					<f:selectItems value="#{materiaCtrl.areaLista}" var="item"
+					value="#{usuarioRegistroCtrl.usuario.especialidad.codigo}" style="width:250px">
+					<f:selectItems value="#{usuarioRegistroCtrl.especialidadesLista}" var="item"
 						itemLabel="#{item.nombre}" itemValue="#{item.codigo}" />
 				</p:selectOneMenu>
 				<p:outputLabel value="#{etiquetas['contrasena.nueva']}*:" />
-				<p:password id="contrasenia" value="#{usuarioCtrl.usuario.apellido}"
+				<p:password id="contrasenia" value="#{usuarioRegistroCtrl.usuario.password}"
 					required="true"
 					requiredMessage="#{etiquetas['contrasena.nueva']} #{mensajes['requerido.femenino']}"
 					maxlength="250" size="25" />
 				<p:outputLabel value="#{etiquetas['confirme.contrasena.nueva']}*:" />
 				<p:password id="contraseniaNueva"
-					value="#{usuarioCtrl.usuario.apellido}" required="true"
+					value="#{usuarioRegistroCtrl.usuario.confirmaPassword}" required="true"
 					requiredMessage="#{etiquetas['confirme.contrasena.nueva']} #{mensajes['requerido.femenino']}"
 					maxlength="250" size="25" />
 			</p:panelGrid>
@@ -119,8 +140,8 @@ body {
 			<br />
 
 			<div align="center">
-				<p:commandButton value="#{etiquetas.crearCuenta}"
-					action="#{usuarioCtrl.guardar}" title="#{etiquetas['crearCuenta']}"
+				<p:commandButton value="#{etiquetas.crearCuenta}" 
+					action="#{usuarioRegistroCtrl.guardarPerfilMedico}" title="#{etiquetas['crearCuenta']}"
 					update="growl">
 				</p:commandButton>
 				<p:commandButton value="#{etiquetas.cancelar}"
@@ -132,40 +153,42 @@ body {
 		</h:form>
 	</p:dialog>
 
-	<p:dialog widgetVar="dlg1" modal="true" height="500" width="700">
+	<p:dialog widgetVar="dlg1" modal="true" height="450" width="600">
 		<h:form id="formUsuarioPaciente">
-			<h1>Paciente</h1>
+			<div align="center">
+				<font size="6" color="#3F51B5">Paciente</font>
+			</div>
 			<p:growl id="growl" autoUpdate="true" />
 			<p:panelGrid columns="2" columnClasses="ui-grid-col-6,ui-grid-col-4"
 				layout="grid" styleClass="ui-panelgrid-blank form-group"
 				style="border:0px none; background-color:transparent;">
 
 				<p:outputLabel value="#{etiquetas['nombres']}*:" />
-				<p:inputText id="nombres" value="#{usuarioCtrl.usuario.nombre}"
+				<p:inputText id="nombres" value="#{usuarioRegistroCtrl.usuario.nombre}"
 					required="true"
 					requiredMessage="#{etiquetas['nombres']} #{mensajes['requerido.masculino']}"
 					maxlength="250" size="25" />
 				<p:outputLabel value="#{etiquetas['apellidos']}*:" />
-				<p:inputText id="apellidos" value="#{usuarioCtrl.usuario.apellido}"
+				<p:inputText id="apellidos" value="#{usuarioRegistroCtrl.usuario.apellido}"
 					required="true"
 					requiredMessage="#{etiquetas['apellidos']} #{mensajes['requerido.masculino']}"
 					maxlength="250" size="25" />
 				<p:outputLabel value="#{etiquetas['correoElectronico']}*:" />
 				<p:inputText id="correoElectronico"
-					value="#{usuarioCtrl.usuario.email}" required="true"
+					value="#{usuarioRegistroCtrl.usuario.email}" required="true"
 					requiredMessage="#{etiquetas['correoElectronico']} #{mensajes['requerido.masculino']}"
 					size="25">
 					<f:validator validatorId="MailValidator" />
 				</p:inputText>
 				<p:outputLabel value="#{etiquetas['contrasena.nueva']}*:" />
-				<p:password id="contrasenia" value="#{usuarioCtrl.usuario.apellido}"
+				<p:password id="contrasenia" value="#{usuarioRegistroCtrl.usuario.password}"
 					required="true"
 					requiredMessage="#{etiquetas['contrasena.nueva']} #{mensajes['requerido.femenino']}"
 					maxlength="250" size="25" />
 				<p:outputLabel value="#{etiquetas['confirme.contrasena.nueva']}*:" />
-				<p:password id="contraseniaNueva"
-					value="#{usuarioCtrl.usuario.apellido}" required="true"
-					requiredMessage="#{etiquetas['confirme.contrasena.nueva']} #{mensajes['requerido.femenino']}"
+				<p:password id="contrasenianueva" value="#{usuarioRegistroCtrl.usuario.confirmaPassword}"
+					required="true"
+					requiredMessage="#{etiquetas['contrasena.nueva']} #{mensajes['requerido.femenino']}"
 					maxlength="250" size="25" />
 			</p:panelGrid>
 
@@ -174,7 +197,7 @@ body {
 
 			<div align="center">
 				<p:commandButton value="#{etiquetas.crearCuenta}"
-					action="#{usuarioCtrl.guardar}" title="#{etiquetas['crearCuenta']}"
+					action="#{usuarioRegistroCtrl.guardarPerfilPaciente}" title="#{etiquetas['crearCuenta']}"
 					update="growl">
 				</p:commandButton>
 				<p:commandButton value="#{etiquetas.cancelar}"

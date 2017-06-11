@@ -13,7 +13,7 @@ import java.util.List;
  */
 public enum EnumTipoParametro {
 
-	PLAN_ESTUDIOS, SEMESTRE, OCUPACION_PROFESOR, NIVEL_ALUMNO, AREA_MATERIA, CARRERA ,ESPECIALIDAD;
+	PLAN_ESTUDIOS, SEMESTRE, OCUPACION_PROFESOR, NIVEL_ALUMNO, AREA_MATERIA, CARRERA ,ESPECIALIDAD, CONF_GENERAL;
 
 	public static List<EnumTipoParametro> getTipoParametroEnumList() {
 		return Arrays.asList(EnumTipoParametro.values());

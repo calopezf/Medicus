@@ -50,11 +50,7 @@ import ec.edu.puce.professorCheck.modelo.Usuario;
 import ec.edu.puce.professorCheck.servicio.ServicioRecurso;
 
 /**
- *
- * @author Juan Ochoa
- *
- *
- *
+ * @author Tapps
  */
 public class BaseCtrl implements Serializable {
 

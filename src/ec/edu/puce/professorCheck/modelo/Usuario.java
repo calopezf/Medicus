@@ -42,16 +42,13 @@ public class Usuario implements Serializable {
 	private EnumEstado estado;
 	@Column(name = "direccion", length = 255)
 	private String direccion;
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "referencia", referencedColumnName = "codigo")
-	private Parametro referencia;
 	@Column(name = "password", length = 64)
 	private String password;
 	@Column(name = "foto", length = 4000)
 	private String foto;
-//	@ManyToOne(optional = false)
-//	@JoinColumn(name = "especialidad", referencedColumnName = "codigo")
-//	private Parametro especialidad;
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "especialidad", referencedColumnName = "codigo", nullable = true)
+	private Parametro especialidad;
 	@Transient
 	private boolean tachado;
 	@Transient
@@ -64,6 +61,7 @@ public class Usuario implements Serializable {
 	@JoinTable(name = "usuario_rol", joinColumns = { @JoinColumn(name = "email", referencedColumnName = "email") }, inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"))
 	private List<Rol> roles;
 	@Transient
+<<<<<<< HEAD
 	private StreamedContent fotoTransient;
 
 	// @ManyToOne(optional = false)
@@ -77,6 +75,9 @@ public class Usuario implements Serializable {
 	// public void setInstitucion(Institucion institucion) {
 	// this.institucion = institucion;
 	// }
+=======
+	private String confirmaPassword;
+>>>>>>> dbdfbb51accc6c6cf2843c5e7b1da4fa57bfcc1d
 
 	public Usuario() {
 	}
@@ -171,14 +172,6 @@ public class Usuario implements Serializable {
 		this.tachado = tachado;
 	}
 
-	public Parametro getReferencia() {
-		return referencia;
-	}
-
-	public void setReferencia(Parametro referencia) {
-		this.referencia = referencia;
-	}
-
 	public String getFoto() {
 		return foto;
 	}
@@ -196,13 +189,21 @@ public class Usuario implements Serializable {
 		return false;
 	}
 
-//	public Parametro getEspecialidad() {
-//		return especialidad;
-//	}
-//
-//	public void setEspecialidad(Parametro especialidad) {
-//		this.especialidad = especialidad;
-//	}
+	public Parametro getEspecialidad() {
+		return especialidad;
+	}
+
+	public void setEspecialidad(Parametro especialidad) {
+		this.especialidad = especialidad;
+	}
+
+	public String getConfirmaPassword() {
+		return confirmaPassword;
+	}
+
+	public void setConfirmaPassword(String confirmaPassword) {
+		this.confirmaPassword = confirmaPassword;
+	}
 
 	public StreamedContent getFotoTransient() {
 		return fotoTransient;
