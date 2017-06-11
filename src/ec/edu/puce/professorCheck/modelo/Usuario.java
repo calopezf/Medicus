@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.primefaces.model.StreamedContent;
+
 import ec.edu.puce.professorCheck.constantes.EnumEstado;
 
 @Entity
@@ -61,6 +63,8 @@ public class Usuario implements Serializable {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "usuario_rol", joinColumns = { @JoinColumn(name = "email", referencedColumnName = "email") }, inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"))
 	private List<Rol> roles;
+	@Transient
+	private StreamedContent fotoTransient;
 
 	// @ManyToOne(optional = false)
 	// @JoinColumn(name = "institucion_id", referencedColumnName = "id")
@@ -73,6 +77,14 @@ public class Usuario implements Serializable {
 	// public void setInstitucion(Institucion institucion) {
 	// this.institucion = institucion;
 	// }
+
+	public Usuario() {
+	}
+	
+	public Usuario(String email) {
+		this.email = email;
+	}
+	
 
 	public List<Rol> getRoles() {
 		return roles;
@@ -174,6 +186,15 @@ public class Usuario implements Serializable {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+	
+	public boolean tieneRolPaciente() {
+		for (Rol rol : roles) {
+			if (rol.getId().esPaciente()) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 //	public Parametro getEspecialidad() {
 //		return especialidad;
@@ -182,6 +203,14 @@ public class Usuario implements Serializable {
 //	public void setEspecialidad(Parametro especialidad) {
 //		this.especialidad = especialidad;
 //	}
+
+	public StreamedContent getFotoTransient() {
+		return fotoTransient;
+	}
+
+	public void setFotoTransient(StreamedContent fotoTransient) {
+		this.fotoTransient = fotoTransient;
+	}
 
 	@Override
 	public String toString() {
