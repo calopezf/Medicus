@@ -4,17 +4,17 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
 	<ui:define name="content">
-		<h:form id="formMateriaLista">
+		<h:form id="formPacientesLista">
 			<h1>#{etiquetas['pacientes']}</h1>
 			<p:growl id="msg" autoUpdate="true" />
 			<h:panelGrid columns="1">
 				<h:panelGrid columns="2" id="gridFiltros" style="width: 700px">
 					<h:panelGrid columns="2" columnClasses="form-label,form-input">
-						<p:outputLabel value="#{etiquetas['codigoMateria']}" />
+						<p:outputLabel value="#{etiquetas['nombres']}" />
 						<p:inputText style="width:120px"
-							value="#{materiaCtrl.materiaFiltro.codigo}"></p:inputText>
-						<p:outputLabel value="#{etiquetas['nombre']}" />
-						<p:inputText value="#{materiaCtrl.materiaFiltro.nombre}"
+							value="#{pacienteCtrl.filtroNombres}"></p:inputText>
+						<p:outputLabel value="#{etiquetas['identificacion']}" />
+						<p:inputText value="#{pacienteCtrl.filtroIdentificacion}"
 							style="width:120px" />
 					</h:panelGrid>
 				</h:panelGrid>
@@ -23,49 +23,53 @@
 						action="/paginas/materia/materia?faces-redirect=true"
 						title="#{etiquetas['crear.nuevo']}" immediate="true">
 					</p:commandButton>
-					<p:commandButton value="Buscar" action="#{materiaCtrl.buscar}"
-						title="#{etiquetas.buscar}">
-						<p:ajax update="itemsPanel" process="gridFiltros" />
-					</p:commandButton>
+					<p:commandButton value="Buscar"
+						actionListener="#{pacienteCtrl.buscarPacientes}"
+						title="#{etiquetas.buscar}" process="@this gridFiltros"
+						update="dgPacientes" />
 				</h:panelGrid>
 			</h:panelGrid>
 
 			<h:panelGroup id="itemsPanel">
-				<ui:repeat var="pct" value="#{pacienteCtrl.pacientes}">
-					<p:panelGrid columns="2" style="width: 650px;">
-						<h:panelGrid columns="3">
-							<p:graphicImage value="#{pct.fotoTransient}" stream="false"
-								height="170" width="150" />
-							<p:fieldset legend="Datos Paciente" style="margin-bottom:20px">
-								<h:panelGrid columns="2">
-									<h:outputText value="Nombres:" />
-									<h:outputText value="#{pct.apellido} #{pct.nombre}" />
+				<p:dataGrid id="dgPacientes" columns="2" style="width: 100%;"
+					paginator="true" value="#{pacienteCtrl.pacientes}" var="pct"
+					rows="4" emptyMessage="#{etiquetas['no.existen.registros']}"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="4,8,12">
+					<h:panelGrid columns="3"
+						style="border-left-style: groove; border-color: #E91E63;">
+						<p:graphicImage value="#{pct.fotoTransient}" stream="false"
+							height="130" width="100" />
+						<p:fieldset legend="Datos Paciente"
+							style="margin-bottom:20px; width:330px;">
+							<h:panelGrid columns="2">
+								<h:outputText value="Nombres:" />
+								<h:outputText value="#{pct.apellido} #{pct.nombre}" />
 
-									<h:outputText value="Email:" />
-									<h:outputText value="#{pct.email}" />
+								<h:outputText value="Email:" />
+								<h:outputText value="#{pct.email}" />
 
-									<h:outputText value="Identificacion:" />
-									<h:outputText value="#{pct.identificacion}" />
+								<h:outputText value="Identificacion:" />
+								<h:outputText value="#{pct.identificacion}" />
 
-									<h:outputText value="Direccion:" />
-									<h:outputText value="#{pct.direccion}" />
-								</h:panelGrid>
-							</p:fieldset>
-							<h:panelGrid columns="1">
-								<p:commandButton value="Agendar Cita" style="width: 150px;"
-									action="/paginas/materia/materia?faces-redirect=true"
-									title="#{etiquetas['crear.nuevo']}" immediate="true">
-								</p:commandButton>
-								<p:commandButton value="Consulta Medica" action="#{materiaCtrl.buscar}"
-									title="#{etiquetas.buscar}" style="width: 150px;">
-								</p:commandButton>
-								<p:commandButton value="Historia Clinica" action="#{materiaCtrl.buscar}"
-									title="#{etiquetas.buscar}" style="width: 150px;">
-								</p:commandButton>
+								<h:outputText value="Direccion:" />
+								<h:outputText value="#{pct.direccion}" />
 							</h:panelGrid>
+						</p:fieldset>
+						<h:panelGrid columns="1">
+							<p:commandButton
+								action="/paginas/materia/materia?faces-redirect=true"
+								title="#{etiquetas['agendarCita']}" immediate="true"
+								icon="ui-icon-today" styleClass="cyan-btn" />
+							<p:commandButton action="#{materiaCtrl.buscar}"
+								title="#{etiquetas['consultaMedica']}" icon="ui-icon-event-note"
+								styleClass="green-btn" />
+							<p:commandButton action="#{materiaCtrl.buscar}"
+								title="#{etiquetas['historiaClinica']}" icon="ui-icon-history"
+								styleClass="pink-btn" />
 						</h:panelGrid>
-					</p:panelGrid>
-				</ui:repeat>
+					</h:panelGrid>
+				</p:dataGrid>
 			</h:panelGroup>
 		</h:form>
 	</ui:define>

@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
 
 /**
  * La clase ServicioUnidadesMedida define metodos para la gestion de la parametrizacion de Unidades de Medida.
@@ -111,6 +112,10 @@ public class ServicioCrud extends CrudServiceCore {
     @Override
     protected Logger logger() {
         return LOGGER;
+    }
+    
+    public EntityManager getEntityManager() {
+    	return super.getEntityManager();
     }
 
 }

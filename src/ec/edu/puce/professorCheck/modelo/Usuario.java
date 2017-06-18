@@ -35,7 +35,7 @@ public class Usuario implements Serializable {
 	private String identificacion;// o username
 	@Column(name = "nombre", nullable = false, length = 200)
 	private String nombre;
-	@Column(name = "apellido", length = 200)
+	@Column(name = "apellido", nullable = false, length = 200)
 	private String apellido;
 	@Column(name = "estado")
 	@Enumerated(EnumType.STRING)
@@ -78,11 +78,10 @@ public class Usuario implements Serializable {
 
 	public Usuario() {
 	}
-	
+
 	public Usuario(String email) {
 		this.email = email;
 	}
-	
 
 	public List<Rol> getRoles() {
 		return roles;
@@ -176,7 +175,7 @@ public class Usuario implements Serializable {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	
+
 	public boolean tieneRolPaciente() {
 		for (Rol rol : roles) {
 			if (rol.getId().esPaciente()) {
