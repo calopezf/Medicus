@@ -34,8 +34,7 @@
 				<p:dataGrid id="dgPacientes" columns="2" style="width: 100%;"
 					paginator="true" value="#{pacienteCtrl.pacientes}" var="pct"
 					rows="4" emptyMessage="#{etiquetas['no.existen.registros']}"
-					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="4,8,12">
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 					<h:panelGrid columns="3"
 						style="border-left-style: groove; border-color: #E91E63;">
 						<p:graphicImage value="#{pct.fotoTransient}" stream="false"
@@ -58,7 +57,7 @@
 						</p:fieldset>
 						<h:panelGrid columns="1">
 							<p:commandButton
-								action="/paginas/materia/materia?faces-redirect=true"
+								action="/paginas/pacientes/agendaCita?faces-redirect=true"
 								title="#{etiquetas['agendarCita']}" immediate="true"
 								icon="ui-icon-today" styleClass="cyan-btn" />
 							<p:commandButton action="#{materiaCtrl.buscar}"

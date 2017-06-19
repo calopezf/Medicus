@@ -67,6 +67,7 @@
       <description></description>
       <url-pattern>/paginas/index.jsf</url-pattern>
       <url-pattern>/paginas/ficha/*</url-pattern>
+      <url-pattern>/paginas/pacientes/*</url-pattern>
       <url-pattern>/paginas/parametros/*</url-pattern>
       <url-pattern>/paginas/personas/*</url-pattern>
       <url-pattern>/paginas/usuarios/*</url-pattern>

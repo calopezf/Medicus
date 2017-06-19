@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 import ec.edu.puce.professorCheck.constantes.EnumEstado;
 
-@Entity	
+@Entity
 @Table(name = "MEDICO_PACIENTE")
 public class MedicoPaciente implements Serializable {
 
@@ -19,10 +19,14 @@ public class MedicoPaciente implements Serializable {
 	 * Serial generado.
 	 */
 	private static final long serialVersionUID = -8190230753457555893L;
-	
+	/**
+	 * Clave primaria de la tabla MEDICO_PACIENTE.
+	 */
 	@EmbeddedId
 	private MedicoPacientePK pk;
-	
+	/**
+	 * Propiedad que representa a la columna estado.
+	 */
 	@Enumerated(EnumType.STRING)
 	@Column(name = "estado", length = 3)
 	private EnumEstado estado;

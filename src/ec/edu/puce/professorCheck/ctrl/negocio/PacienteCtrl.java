@@ -15,11 +15,8 @@ import javax.faces.event.ActionEvent;
 
 import org.primefaces.model.DefaultStreamedContent;
 
-import ec.edu.puce.professorCheck.constantes.EnumEstado;
 import ec.edu.puce.professorCheck.crud.ServicioCrud;
 import ec.edu.puce.professorCheck.ctrl.BaseCtrl;
-import ec.edu.puce.professorCheck.modelo.MedicoPaciente;
-import ec.edu.puce.professorCheck.modelo.MedicoPacientePK;
 import ec.edu.puce.professorCheck.modelo.Usuario;
 import ec.edu.puce.professorCheck.servicio.ServicioPaciente;
 
