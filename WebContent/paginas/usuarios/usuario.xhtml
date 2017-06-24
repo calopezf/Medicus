@@ -3,14 +3,27 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	template="/WEB-INF/template.xhtml" xmlns:p="http://primefaces.org/ui">
-
-	<br />
-
 	<ui:define name="content">
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_utMGsrbWjkTFthrTR4rfX8khdRgt6S8"></script>
+		<style>
+.img-circle {
+	border-radius: 50%;
+}
+</style>
+
 		<h:form id="formUsuario">
 			<p:growl id="growl" autoUpdate="true" />
 			<h:panelGrid columns="2">
-				<h:panelGrid columns="2" columnClasses="form-label,form-input">
+				<h:panelGrid columns="2">
+					<p:outputLabel value="#{etiquetas['correoElectronico']}*:" />
+					<p:inputText id="correoElectronico"
+						value="#{usuarioCtrl.usuario.email}" required="true"
+						disabled="#{not usuarioCtrl.administrador}"
+						requiredMessage="#{etiquetas['correoElectronico']} #{mensajes['requerido.masculino']}"
+						size="25">
+						<f:validator validatorId="MailValidator" />
+					</p:inputText>
 					<p:outputLabel value="#{etiquetas['cedula']}*:" />
 					<p:inputText id="cedula" size="16"
 						value="#{usuarioCtrl.usuario.identificacion}" required="true"
@@ -31,13 +44,7 @@
 					<p:outputLabel value="#{etiquetas['direccion.domicilio']}:" />
 					<p:inputText id="residencia" size="48"
 						value="#{usuarioCtrl.usuario.direccion}" maxlength="250" />
-					<p:outputLabel value="#{etiquetas['correoElectronico']}*:" />
-					<p:inputText id="correoElectronico"
-						value="#{usuarioCtrl.usuario.email}" required="true"
-						requiredMessage="#{etiquetas['correoElectronico']} #{mensajes['requerido.masculino']}"
-						size="25">
-						<f:validator validatorId="MailValidator" />
-					</p:inputText>
+
 
 					<p:outputLabel value="#{etiquetas['rol']}*:"
 						rendered="#{usuarioCtrl.administrador}" />
@@ -57,29 +64,33 @@
 					</p:selectCheckboxMenu-->
 
 
-					<p:outputLabel for="estado" value="#{etiquetas['estado']}*:" />
-					<p:selectOneMenu id="estado" value="#{usuarioCtrl.usuario.estado}">
+					<p:outputLabel for="estado" value="#{etiquetas['estado']}*:"
+						rendered="#{usuarioCtrl.administrador}" />
+					<p:selectOneMenu id="estado" value="#{usuarioCtrl.usuario.estado}"
+						rendered="#{usuarioCtrl.administrador}">
 						<f:selectItems value="#{selectItemCtrl.estadoEnum}" />
 					</p:selectOneMenu>
 
-					<p:outputLabel for="foto" value="#{etiquetas['foto']}:" />
-
-					<h:panelGroup id="panFoto">
-						<h:panelGrid columns="2">
-							<p:graphicImage id="foto" value="#{usuarioCtrl.imagePath}"
-								rendered="#{usuarioCtrl.imagePath != null}"
-								style="width:120px; height:120px;" />
-						</h:panelGrid>
-						<p:fileUpload fileUploadListener="#{usuarioCtrl.upload}"
-							allowTypes="/(\.|\/)(gif|jpe?g|png)$/" sizeLimit="10000000"
-							update="growl panFoto"></p:fileUpload>
-					</h:panelGroup>
-
-
 				</h:panelGrid>
+				<h:panelGrid>
+						<p:graphicImage id="foto" value="#{usuarioCtrl.imagePath}"
+							styleClass="img-circle"
+							rendered="#{usuarioCtrl.imagePath != null}"
+							style="width:150px; height:150px;" />
 
-
+						<h:panelGroup id="panFoto">
+							<div align="center">
+								<p:fileUpload fileUploadListener="#{usuarioCtrl.upload}" mode="simple"
+									style="width:400px;" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+									sizeLimit="10000000" update="growl panFoto">
+								</p:fileUpload>
+							</div>
+						</h:panelGroup>
+				</h:panelGrid>
 			</h:panelGrid>
+
+			<p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID"
+				style="width:90%;height:400px" />
 			<p:outputLabel value="#{etiquetas['campos.obligatorios']}" />
 
 
@@ -93,7 +104,13 @@
 					update="growl">
 				</p:commandButton>
 				<p:commandButton value="#{etiquetas.atras}"
+					rendered="#{usuarioCtrl.administrador}"
 					action="/paginas/usuarios/usuarioLista?faces-redirect=true"
+					title="#{etiquetas['atras']}" immediate="true">
+				</p:commandButton>
+				<p:commandButton value="#{etiquetas.atras}"
+					rendered="#{not usuarioCtrl.administrador}"
+					action="/paginas/index?faces-redirect=true"
 					title="#{etiquetas['atras']}" immediate="true">
 				</p:commandButton>
 			</div>

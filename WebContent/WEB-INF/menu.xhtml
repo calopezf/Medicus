@@ -5,17 +5,20 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pu="http://primefaces.org/ultima">
 
+
+<style>
+.img-circle {
+    border-radius: 50%;
+}
+</style>
+
 	<h:form id="menuform">
 		<div class="layout-menu #{guestPreferences.menuClass}">
 			<div class="nano">
 				<div class="nano-content menu-scroll-content">
 					<ui:fragment
 						rendered="#{guestPreferences.profileMode == 'inline' and guestPreferences.menuLayout != 'menu-layout-static menu-layout-horizontal'}">
-						<br />
-						<div align="center">
-							<h:graphicImage value="/img/medicus.jpg"
-								style="width:120px; height:120px;" />
-						</div>
+						
 						<div class="profile">
 							<div>
 								<h:outputText value="#{usuarioCtrl.currentDateObj}">
@@ -23,9 +26,9 @@
 								</h:outputText>
 							</div>
 							<div align="center">
-								<h:graphicImage value="/img/#{sesionCtrl.usuarioLogueado.foto}"
+								<h:graphicImage value="/img/#{sesionCtrl.usuarioLogueado.foto}" styleClass="img-circle"
 									rendered="#{sesionCtrl.usuarioLogueado.foto!=null}"
-									style="width:45px; height:45px;" />
+									style="width:70px; height:70px;" />
 							</div>
 							<a id="profile-options" href="#"> <span class="profile-name">
 									#{sesionCtrl.usuarioLogueado.nombre}

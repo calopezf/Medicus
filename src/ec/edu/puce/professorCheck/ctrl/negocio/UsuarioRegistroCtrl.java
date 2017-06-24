@@ -26,6 +26,7 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DualListModel;
 
 import ec.edu.puce.professorCheck.constantes.EnumEstado;
+import ec.edu.puce.professorCheck.constantes.EnumRol;
 import ec.edu.puce.professorCheck.constantes.EnumTipoParametro;
 import ec.edu.puce.professorCheck.crud.ServicioCrud;
 import ec.edu.puce.professorCheck.ctrl.BaseCtrl;
@@ -146,10 +147,17 @@ public class UsuarioRegistroCtrl extends BaseCtrl {
 	public String guardarPerfilMedico() {
 
 		try {
+			Usuario usuarioExistente = servicioCrud.findById(
+					usuario.getEmail(), Usuario.class);
+			if (usuarioExistente != null) {
+				String m = getBundleMensajes("correoYaRegistrado", null);
+				addErrorMessage(m, m, null);
+				return null;
+			}
 			if (usuario.getPassword().equals(usuario.getConfirmaPassword())) {
 				List<Rol> rolesXUsuario = new ArrayList<Rol>();
 				Rol rolNuevo;
-				rolNuevo = servicioCrud.findById("DOCTOR", Rol.class);
+				rolNuevo = servicioCrud.findById(EnumRol.DOCTOR, Rol.class);
 				rolesXUsuario.add(rolNuevo);
 				usuario.setEstado(EnumEstado.ACT);
 				usuario.setRoles(rolesXUsuario);
@@ -177,10 +185,18 @@ public class UsuarioRegistroCtrl extends BaseCtrl {
 	public String guardarPerfilPaciente() {
 
 		try {
+			Usuario usuarioExistente = servicioCrud.findById(
+					usuario.getEmail(), Usuario.class);
+			if (usuarioExistente != null) {
+				String m = getBundleMensajes("correoYaRegistrado", null);
+				addErrorMessage(m, m, null);
+				return null;
+			}
+
 			if (usuario.getPassword().equals(usuario.getConfirmaPassword())) {
 				List<Rol> rolesXUsuario = new ArrayList<Rol>();
 				Rol rolNuevo;
-				rolNuevo = servicioCrud.findById("PACIENTE", Rol.class);
+				rolNuevo = servicioCrud.findById(EnumRol.PACIENTE, Rol.class);
 				rolesXUsuario.add(rolNuevo);
 				usuario.setEstado(EnumEstado.ACT);
 				usuario.setEspecialidad(null);

@@ -66,7 +66,7 @@ public class UsuarioCtrl extends BaseCtrl {
 
 	}
 
-	private String destination = "C:\\Java\\wildfly-8.2.1.Final\\standalone\\deployments\\professorCheck.war\\img\\";
+	private String destination = "C:\\Java\\wildfly-8.2.1.FinalMedicus\\standalone\\deployments\\medicus.war\\img\\";
 
 	public void upload(FileUploadEvent event) {
 		try {
@@ -222,15 +222,17 @@ public class UsuarioCtrl extends BaseCtrl {
 			// if (validadorDeCedula(this.usuario.getIdentificacion())) {
 			// pone los roles seleccionados
 			List<Rol> rolesXUsuario = new ArrayList<Rol>();
-			Rol rolNuevo;
-			for (String id : getComponenteRoles().getTarget()) {
-				rolNuevo = servicioCrud.findById(id, Rol.class);
-				rolesXUsuario.add(rolNuevo);
+			if (isAdministrador()) {
+				Rol rolNuevo;
+				for (String id : getComponenteRoles().getTarget()) {
+					rolNuevo = servicioCrud.findById(id, Rol.class);
+					rolesXUsuario.add(rolNuevo);
+				}
+				usuario.setRoles(rolesXUsuario);
 			}
-			usuario.setRoles(rolesXUsuario);
 			Usuario usuarioEnBase = usuarioServicio
-					.obtieneUsuarioXCedula(usuario.getIdentificacion());
-			if (usuarioEnBase.getIdentificacion() == null) {
+					.obtieneUsuarioXEmail(usuario.getEmail());
+			if (usuarioEnBase.getEmail() == null) {
 				this.usuario.setPassword(this.usuario.getIdentificacion());
 				servicioCrud.insert(this.usuario);
 			} else {
@@ -251,7 +253,10 @@ public class UsuarioCtrl extends BaseCtrl {
 			return null;
 		}
 
-		return "/paginas/usuarios/usuarioLista";
+		if (isAdministrador()) {
+			return "/paginas/usuarios/usuarioLista";
+		}
+		return null;
 	}
 
 	public String guardarPerfilMedico() {
@@ -284,7 +289,6 @@ public class UsuarioCtrl extends BaseCtrl {
 	}
 
 	public String guardarPerfilPaciente() {
-
 
 		try {
 			// if (validadorDeCedula(this.usuario.getIdentificacion())) {
@@ -518,7 +522,7 @@ public class UsuarioCtrl extends BaseCtrl {
 
 	public List<Parametro> getEspecialidadesLista() {
 		if (especialidadesLista == null) {
-			especialidadesLista=new ArrayList<Parametro>();
+			especialidadesLista = new ArrayList<Parametro>();
 			Parametro referenciaFiltro = new Parametro();
 			referenciaFiltro.setTipo(EnumTipoParametro.ESPECIALIDAD);
 			referenciaFiltro.setEstado(EnumEstado.ACT);
