@@ -45,7 +45,59 @@
 					<p:inputText id="residencia" size="48"
 						value="#{usuarioCtrl.usuario.direccion}" maxlength="250" />
 
+					<p:outputLabel value="#{etiquetas['fecha.nacimiento']}:" />
+					<p:calendar id="fecha"
+						value="#{usuarioCtrl.usuario.fechaNacimiento}" style="width:250px" />
 
+					<p:outputLabel value="#{etiquetas['genero']}:" />
+					<p:selectOneRadio id="genero" value="#{usuarioCtrl.usuario.genero}">
+						<f:selectItem itemLabel="#{etiquetas['masculino']}" itemValue="F" />
+						<f:selectItem itemLabel="#{etiquetas['femenino']}" itemValue="M" />
+					</p:selectOneRadio>
+
+					<p:outputLabel value="#{etiquetas['codigoMedico']}:" />
+					<p:inputText id="codigoMedico"
+						value="#{usuarioCtrl.usuario.codigoMedico}" maxlength="10"
+						size="25" />
+
+					<p:outputLabel value="#{etiquetas['pais']}:" />
+					<p:selectOneMenu id="pais"
+						value="#{usuarioCtrl.usuario.pais.codigo}" style="width:250px">
+						<f:selectItems value="#{usuarioCtrl.paisLista}" var="item"
+							itemLabel="#{item.nombre}" itemValue="#{item.codigo}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{etiquetas['ciudad']}:" />
+					<p:selectOneMenu id="ciudad"
+						value="#{usuarioCtrl.usuario.ciudad.codigo}" style="width:250px">
+						<f:selectItems value="#{usuarioCtrl.ciudadLista}" var="item"
+							itemLabel="#{item.nombre}" itemValue="#{item.codigo}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{etiquetas['telefono']}:" />
+					<p:inputText id="telefono"
+						value="#{usuarioCtrl.usuario.telefonoFijo}" maxlength="20" />
+
+					<p:outputLabel value="#{etiquetas['celular']}:" />
+					<p:inputText id="celular" value="#{usuarioCtrl.usuario.celular}"
+						maxlength="20" />
+
+					<p:outputLabel value="#{etiquetas['valorConsulta']}:" />
+					<p:inputText id="valorConsulta"
+						value="#{usuarioCtrl.usuario.valorConsulta}" maxlength="20" />
+
+					<h:outputText value="#{etiquetas['tieneAsistente']}:" />
+					<p:selectBooleanCheckbox
+						value="#{usuarioCtrl.usuario.tieneAsistente}">
+						<p:ajax update="asistente" listener="#{selectBooleanView.addMessage}" />
+					</p:selectBooleanCheckbox>
+
+					<h:panelGroup id="asistente" rendered="#{usuarioCtrl.usuario.tieneAsistente}">
+						<p:outputLabel value="#{etiquetas['emailAsistente']}:" />
+						<p:inputText id="emAsis"
+							value="#{usuarioCtrl.usuario.emailAsistente}" maxlength="100" />
+					</h:panelGroup>
+					
 					<p:outputLabel value="#{etiquetas['rol']}*:"
 						rendered="#{usuarioCtrl.administrador}" />
 					<p:pickList id="pickList" value="#{usuarioCtrl.componenteRoles}"
@@ -73,19 +125,20 @@
 
 				</h:panelGrid>
 				<h:panelGrid>
-						<p:graphicImage id="foto" value="#{usuarioCtrl.imagePath}"
-							styleClass="img-circle"
-							rendered="#{usuarioCtrl.imagePath != null}"
-							style="width:150px; height:150px;" />
+					<p:graphicImage id="foto" value="#{usuarioCtrl.imagePath}"
+						styleClass="img-circle"
+						rendered="#{usuarioCtrl.imagePath != null}"
+						style="width:150px; height:150px;" />
 
-						<h:panelGroup id="panFoto">
-							<div align="center">
-								<p:fileUpload fileUploadListener="#{usuarioCtrl.upload}" mode="simple"
-									style="width:400px;" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-									sizeLimit="10000000" update="growl panFoto">
-								</p:fileUpload>
-							</div>
-						</h:panelGroup>
+					<h:panelGroup id="panFoto">
+						<div align="center">
+							<p:fileUpload fileUploadListener="#{usuarioCtrl.upload}"
+								mode="simple" style="width:400px;"
+								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" sizeLimit="10000000"
+								update="growl panFoto">
+							</p:fileUpload>
+						</div>
+					</h:panelGroup>
 				</h:panelGrid>
 			</h:panelGrid>
 

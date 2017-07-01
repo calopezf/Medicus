@@ -1,6 +1,8 @@
 package ec.edu.puce.professorCheck.modelo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.persistence.Transient;
 
 import org.primefaces.model.StreamedContent;
@@ -49,6 +52,33 @@ public class Usuario implements Serializable {
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "especialidad", referencedColumnName = "codigo", nullable = true)
 	private Parametro especialidad;
+	@Column(name = "fecha_creacion", nullable = true)
+	@Temporal(javax.persistence.TemporalType.DATE)
+	private Date fechaNacimiento;
+	@Column(name = "genero", length = 1, nullable = true)
+	private String genero;
+	@Column(name = "codigo_medico", length = 20, nullable = true)
+	private String codigoMedico;
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "pais", referencedColumnName = "codigo", nullable = true)
+	private Parametro pais;
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "ciudad", referencedColumnName = "codigo", nullable = true)
+	private Parametro ciudad;
+	@Column(name = "telefono_fijo", length = 20, nullable = true)
+	private String telefonoFijo;
+	@Column(name = "celular", length = 20, nullable = true)
+	private String celular;
+	@Column(name = "valor_consulta", nullable = true)
+	private BigDecimal valorConsulta;
+	@Column(name = "tiene_Asistente", nullable = true)
+	private Boolean tieneAsistente;
+	@Column(name = "email_asistente", length = 200)
+	private String emailAsistente;
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "asistente", referencedColumnName = "email", nullable = true)
+	private Usuario asistente;
+
 	@Transient
 	private boolean tachado;
 	@Transient
@@ -207,6 +237,94 @@ public class Usuario implements Serializable {
 
 	public void setFotoTransient(StreamedContent fotoTransient) {
 		this.fotoTransient = fotoTransient;
+	}
+
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public Parametro getPais() {
+		return pais;
+	}
+
+	public void setPais(Parametro pais) {
+		this.pais = pais;
+	}
+
+	public Parametro getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(Parametro ciudad) {
+		this.ciudad = ciudad;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public BigDecimal getValorConsulta() {
+		return valorConsulta;
+	}
+
+	public void setValorConsulta(BigDecimal valorConsulta) {
+		this.valorConsulta = valorConsulta;
+	}
+
+	public Boolean getTieneAsistente() {
+		return tieneAsistente;
+	}
+
+	public void setTieneAsistente(Boolean tieneAsistente) {
+		this.tieneAsistente = tieneAsistente;
+	}
+
+	public String getEmailAsistente() {
+		return emailAsistente;
+	}
+
+	public void setEmailAsistente(String emailAsistente) {
+		this.emailAsistente = emailAsistente;
+	}
+
+	public Usuario getAsistente() {
+		return asistente;
+	}
+
+	public void setAsistente(Usuario asistente) {
+		this.asistente = asistente;
+	}
+
+	public String getTelefonoFijo() {
+		return telefonoFijo;
+	}
+
+	public void setTelefonoFijo(String telefonoFijo) {
+		this.telefonoFijo = telefonoFijo;
+	}
+
+	public String getCodigoMedico() {
+		return codigoMedico;
+	}
+
+	public void setCodigoMedico(String codigoMedico) {
+		this.codigoMedico = codigoMedico;
 	}
 
 	@Override

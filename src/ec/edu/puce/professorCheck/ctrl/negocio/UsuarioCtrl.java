@@ -59,6 +59,8 @@ public class UsuarioCtrl extends BaseCtrl {
 	private List<Parametro> referenciaLista;
 	private DualListModel<String> componenteRoles;
 	private List<Parametro> especialidadesLista;
+	private List<Parametro> paisLista;
+	private List<Parametro> ciudadLista;
 
 	@PostConstruct
 	public void postConstructor() {
@@ -545,6 +547,12 @@ public class UsuarioCtrl extends BaseCtrl {
 		this.referenciaLista = null;
 	}
 
+	public void cambiaTieneAsistente(AjaxBehaviorEvent event) {
+		if (!usuario.getTieneAsistente()) {
+			usuario.setEmailAsistente(null);
+		}
+	}
+
 	public DualListModel<String> getComponenteRoles() {
 		if (componenteRoles == null) {
 			componenteRoles = new DualListModel<String>();
@@ -554,6 +562,22 @@ public class UsuarioCtrl extends BaseCtrl {
 
 	public void setComponenteRoles(DualListModel<String> componenteRoles) {
 		this.componenteRoles = componenteRoles;
+	}
+
+	public List<Parametro> getPaisLista() {
+		return paisLista;
+	}
+
+	public void setPaisLista(List<Parametro> paisLista) {
+		this.paisLista = paisLista;
+	}
+
+	public List<Parametro> getCiudadLista() {
+		return ciudadLista;
+	}
+
+	public void setCiudadLista(List<Parametro> ciudadLista) {
+		this.ciudadLista = ciudadLista;
 	}
 
 }
