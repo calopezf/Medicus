@@ -22,6 +22,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
@@ -29,14 +30,22 @@ import java.util.ResourceBundle;
 import java.util.TimeZone;
 
 import javax.ejb.EJB;
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseStream;
+import javax.faces.context.ResponseWriter;
+import javax.faces.render.RenderKit;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang3.StringUtils;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
@@ -819,4 +828,43 @@ public class BaseCtrl implements Serializable {
 			}
 		}
 	}
+
+	/**
+	 * Elimina un java bean de la session del usuario. Utiliza un busqueda
+	 * aproximada con el nombre de la clase del java bean.
+	 * 
+	 * @param recurso
+	 *            Nombre del recurso para eliminar de la session de usuario.
+	 */
+	public static void removerBean(String recurso) {
+		// TODO: CFG WAS COMENTADO
+		// try {
+		// WebsphereUtil.eliminarBean(recurso);
+		// } catch (NamingException e) {
+		// LoggerUtil.namingException(e, FacesUtil.class);
+		// }
+		// TODO: CFG JBOSS AGREGADO
+		String[] beansEnSesion = session().getValueNames();
+		for (String bean : beansEnSesion) {
+			if (recurso != null) {
+				if (StringUtils.containsIgnoreCase(bean, ".".concat(recurso))) {
+					session().removeAttribute(bean);
+					break;
+				}
+			} else {
+				session().removeAttribute(bean);
+			}
+		}
+	}
+
+	/**
+	 * Obtiene la session actual.
+	 * 
+	 * @return instancia de HttpSession del usuario.
+	 */
+	public static HttpSession session() {
+		return ((HttpServletRequest) FacesContext.getCurrentInstance()
+				.getExternalContext().getRequest()).getSession(true);
+	}
+
 }

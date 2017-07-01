@@ -43,6 +43,7 @@ public class Cita implements Serializable {
 	private EnumEstado estado;
 	/**
 	 * Propiedad que representa a la columna descripcion;
+	 * Motivo de la consulta.
 	 */
 	private String descripcion;
 
