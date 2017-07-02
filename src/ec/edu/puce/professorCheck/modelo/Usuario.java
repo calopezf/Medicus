@@ -216,6 +216,9 @@ public class Usuario implements Serializable {
 	}
 
 	public Parametro getEspecialidad() {
+		if(especialidad==null){
+			especialidad=new Parametro();
+		}
 		return especialidad;
 	}
 
@@ -256,6 +259,9 @@ public class Usuario implements Serializable {
 	}
 
 	public Parametro getPais() {
+		if(pais==null){
+			pais=new Parametro();
+		}
 		return pais;
 	}
 
@@ -264,6 +270,9 @@ public class Usuario implements Serializable {
 	}
 
 	public Parametro getCiudad() {
+		if(ciudad==null){
+			ciudad=new Parametro();
+		}
 		return ciudad;
 	}
 

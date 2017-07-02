@@ -5,17 +5,93 @@
 	template="/WEB-INF/template.xhtml" xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
 		<script
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_utMGsrbWjkTFthrTR4rfX8khdRgt6S8"></script>
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_utMGsrbWjkTFthrTR4rfX8khdRgt6S8">
+		
+		</script>
+
+		<script type="text/javascript"
+			src="http://maps.google.com/maps/api/js?key=AIzaSyC_utMGsrbWjkTFthrTR4rfX8khdRgt6S8"></script>
+		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+
+
+		<script type="text/javascript">
+    if (navigator.geolocation) {
+        checkGeolocationByHTML5();
+    } else {
+        checkGeolocationByLoaderAPI(); // HTML5 not supported! Fall back to Loader API.
+    }
+
+    function checkGeolocationByHTML5() {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            setMapCenter(position.coords.latitude, position.coords.longitude);
+        }, function() {
+            checkGeolocationByLoaderAPI(); // Error! Fall back to Loader API.
+        });
+    }
+
+    function checkGeolocationByLoaderAPI() {
+        if (google.loader.ClientLocation) {
+            setMapCenter(google.loader.ClientLocation.latitude, google.loader.ClientLocation.longitude);
+        } else {
+            // Unsupported! Show error/warning?
+        }
+    }
+
+    function setMapCenter(latitude, longitude) {
+    	//document.getElementById('w_gmap')
+        PF('w_gmap').getMap().setCenter(new google.maps.LatLng(latitude, longitude));
+    }
+</script>
+
+		<script type="text/javascript">
+    var currentMarker = null;
+ 
+    function handlePointClick(event) {
+        if(currentMarker === null) {
+            document.getElementById('lat').value = event.latLng.lat();
+            document.getElementById('lng').value = event.latLng.lng();
+ 
+            currentMarker = new google.maps.Marker({
+                position:new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())
+            });
+ 
+            PF('map').addOverlay(currentMarker);
+ 
+            PF('dlg').show();
+        }   
+    }
+ 
+    function markerAddComplete() {
+        var title = document.getElementById('title');
+        currentMarker.setTitle(title.value);
+        title.value = "";
+ 
+        currentMarker = null;
+        PF('dlg').hide();
+    }
+ 
+    function cancel() {
+        PF('dlg').hide();
+        currentMarker.setMap(null);
+        currentMarker = null;
+ 
+        return false;
+    }
+</script>
+
 		<style>
 .img-circle {
 	border-radius: 50%;
 }
 </style>
 
+
+
 		<h:form id="formUsuario">
 			<p:growl id="growl" autoUpdate="true" />
 			<h:panelGrid columns="2">
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="2" columnClasses="ui-grid-col-4,ui-grid-col-4">
 					<p:outputLabel value="#{etiquetas['correoElectronico']}*:" />
 					<p:inputText id="correoElectronico"
 						value="#{usuarioCtrl.usuario.email}" required="true"
@@ -46,7 +122,7 @@
 						value="#{usuarioCtrl.usuario.direccion}" maxlength="250" />
 
 					<p:outputLabel value="#{etiquetas['fecha.nacimiento']}:" />
-					<p:calendar id="fecha"
+					<p:calendar id="fecha" yearRange="c-100:c" navigator="true"
 						value="#{usuarioCtrl.usuario.fechaNacimiento}" style="width:250px" />
 
 					<p:outputLabel value="#{etiquetas['genero']}:" />
@@ -74,7 +150,7 @@
 							itemLabel="#{item.nombre}" itemValue="#{item.codigo}" />
 					</p:selectOneMenu>
 
-					<p:outputLabel value="#{etiquetas['telefono']}:" />
+					<p:outputLabel value="#{etiquetas['telefonoFijo']}:" />
 					<p:inputText id="telefono"
 						value="#{usuarioCtrl.usuario.telefonoFijo}" maxlength="20" />
 
@@ -89,15 +165,12 @@
 					<h:outputText value="#{etiquetas['tieneAsistente']}:" />
 					<p:selectBooleanCheckbox
 						value="#{usuarioCtrl.usuario.tieneAsistente}">
-						<p:ajax update="asistente" listener="#{selectBooleanView.addMessage}" />
+						<p:ajax update="asistente"
+							listener="#{usuarioCtrl.cambiaTieneAsistente}" />
 					</p:selectBooleanCheckbox>
 
-					<h:panelGroup id="asistente" rendered="#{usuarioCtrl.usuario.tieneAsistente}">
-						<p:outputLabel value="#{etiquetas['emailAsistente']}:" />
-						<p:inputText id="emAsis"
-							value="#{usuarioCtrl.usuario.emailAsistente}" maxlength="100" />
-					</h:panelGroup>
-					
+
+
 					<p:outputLabel value="#{etiquetas['rol']}*:"
 						rendered="#{usuarioCtrl.administrador}" />
 					<p:pickList id="pickList" value="#{usuarioCtrl.componenteRoles}"
@@ -133,17 +206,33 @@
 					<h:panelGroup id="panFoto">
 						<div align="center">
 							<p:fileUpload fileUploadListener="#{usuarioCtrl.upload}"
-								mode="simple" style="width:400px;"
-								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" sizeLimit="10000000"
-								update="growl panFoto">
+								style="width:400px;" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+								sizeLimit="10000000" update="growl panFoto foto">
 							</p:fileUpload>
 						</div>
 					</h:panelGroup>
 				</h:panelGrid>
 			</h:panelGrid>
+			<h:panelGroup id="asistente">
+				<p:fieldset legend="Asistente"
+					style="margin-bottom:20px; width:500px;"
+					rendered="#{usuarioCtrl.usuario.tieneAsistente}">
+					<h:panelGrid columns="2"
+						columnClasses="ui-grid-col-4,ui-grid-col-4">
+						<p:outputLabel value="#{etiquetas['emailAsistente']}:"
+							rendered="#{usuarioCtrl.usuario.tieneAsistente}" />
+						<p:inputText value="#{usuarioCtrl.usuario.emailAsistente}"
+							required="true" disabled="#{not usuarioCtrl.administrador}"
+							requiredMessage="#{etiquetas['asistente']} #{mensajes['requerido.masculino']}"
+							maxlength="100" rendered="#{usuarioCtrl.usuario.tieneAsistente}"
+							style="width:325px;" />
+					</h:panelGrid>
+				</p:fieldset>
+			</h:panelGroup>
 
-			<p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID"
-				style="width:90%;height:400px" />
+			<p:gmap widgetVar="w_gmap" 
+				zoom="30" type="HYBRID" style="width:90%;height:400px"
+				model="#{usuarioCtrl.simpleModel}" />
 			<p:outputLabel value="#{etiquetas['campos.obligatorios']}" />
 
 
@@ -169,6 +258,7 @@
 			</div>
 
 		</h:form>
+		
 		<!--<p:ajaxStatus onstart="loadingDialog.show();" onsuccess="loadingDialog.hide();"/>  
         <p:dialog modal="true" widgetVar="loadingDialog" header="..." draggable="false" closable="false" width="200" height="50" resizable="false">
             <br/>

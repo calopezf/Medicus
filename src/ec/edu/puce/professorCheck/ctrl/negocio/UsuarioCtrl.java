@@ -24,6 +24,8 @@ import javax.faces.event.AjaxBehaviorEvent;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DualListModel;
+import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.MapModel;
 
 import ec.edu.puce.professorCheck.constantes.EnumEstado;
 import ec.edu.puce.professorCheck.constantes.EnumTipoParametro;
@@ -61,6 +63,7 @@ public class UsuarioCtrl extends BaseCtrl {
 	private List<Parametro> especialidadesLista;
 	private List<Parametro> paisLista;
 	private List<Parametro> ciudadLista;
+	private MapModel simpleModel;
 
 	@PostConstruct
 	public void postConstructor() {
@@ -127,7 +130,8 @@ public class UsuarioCtrl extends BaseCtrl {
 					usuario = new Usuario();
 					usuario.setRegistroNuevo(true);
 					usuario.setRoles(new ArrayList<Rol>());
-					usuario.setEspecialidad(new Parametro());
+					usuario.setGenero("M");
+					usuario.setTieneAsistente(false);
 					List<String> rolTarget = new ArrayList<String>();
 					List<String> rolSource = new ArrayList<String>();
 					List<Rol> rolesBase = rolServicio.devuelveRolesActivos();
@@ -159,7 +163,8 @@ public class UsuarioCtrl extends BaseCtrl {
 						usuario = new Usuario();
 						usuario.setRegistroNuevo(true);
 						usuario.setRoles(new ArrayList<Rol>());
-						usuario.setEspecialidad(new Parametro());
+						usuario.setGenero("M");
+						usuario.setTieneAsistente(false);
 						List<String> rolTarget = new ArrayList<String>();
 						List<String> rolSource = new ArrayList<String>();
 						List<Rol> rolesBase = rolServicio
@@ -223,6 +228,15 @@ public class UsuarioCtrl extends BaseCtrl {
 		try {
 			// if (validadorDeCedula(this.usuario.getIdentificacion())) {
 			// pone los roles seleccionados
+			if(usuario.getEspecialidad().getCodigo()==null){
+				usuario.setEspecialidad(null);
+			}
+			if(usuario.getPais().getCodigo()==null){
+				usuario.setPais(null);
+			}
+			if(usuario.getCiudad().getCodigo()==null){
+				usuario.setCiudad(null);
+			}
 			List<Rol> rolesXUsuario = new ArrayList<Rol>();
 			if (isAdministrador()) {
 				Rol rolNuevo;
@@ -579,5 +593,30 @@ public class UsuarioCtrl extends BaseCtrl {
 	public void setCiudadLista(List<Parametro> ciudadLista) {
 		this.ciudadLista = ciudadLista;
 	}
+
+	public MapModel getSimpleModel() {
+		if(simpleModel==null){
+			 simpleModel = new DefaultMapModel();
+	          
+//		        //Shared coordinates
+//		        LatLng coord1 = simpleModel.;
+//		        LatLng coord2 = new LatLng(36.883707, 30.689216);
+//		        LatLng coord3 = new LatLng(36.879703, 30.706707);
+//		        LatLng coord4 = new LatLng(36.885233, 30.702323);
+//		          
+//		        //Basic marker
+//		        simpleModel.addOverlay(new Marker(coord1, "Konyaalti"));
+//		        simpleModel.addOverlay(new Marker(coord2, "Ataturk Parki"));
+//		        simpleModel.addOverlay(new Marker(coord3, "Karaalioglu Parki"));
+//		        simpleModel.addOverlay(new Marker(coord4, "Kaleici"));
+		}
+		return simpleModel;
+	}
+
+	public void setSimpleModel(MapModel simpleModel) {
+		this.simpleModel = simpleModel;
+	}
+	
+	
 
 }
