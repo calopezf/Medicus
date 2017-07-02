@@ -219,10 +219,10 @@
 					rendered="#{usuarioCtrl.usuario.tieneAsistente}">
 					<h:panelGrid columns="2"
 						columnClasses="ui-grid-col-4,ui-grid-col-4">
-						<p:outputLabel value="#{etiquetas['emailAsistente']}:"
+						<p:outputLabel value="#{etiquetas['emailAsistente']}:*"
 							rendered="#{usuarioCtrl.usuario.tieneAsistente}" />
 						<p:inputText value="#{usuarioCtrl.usuario.emailAsistente}"
-							required="true" disabled="#{not usuarioCtrl.administrador}"
+							required="true" 
 							requiredMessage="#{etiquetas['asistente']} #{mensajes['requerido.masculino']}"
 							maxlength="100" rendered="#{usuarioCtrl.usuario.tieneAsistente}"
 							style="width:325px;" />
