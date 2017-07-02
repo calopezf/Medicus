@@ -9,8 +9,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.model.DefaultStreamedContent;
@@ -21,7 +21,7 @@ import ec.edu.puce.professorCheck.modelo.Usuario;
 import ec.edu.puce.professorCheck.servicio.ServicioPaciente;
 
 @ManagedBean(name = "pacienteCtrl")
-@ViewScoped
+@SessionScoped
 public class PacienteCtrl extends BaseCtrl implements Serializable {
 
 	/**

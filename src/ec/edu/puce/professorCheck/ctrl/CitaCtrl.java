@@ -6,8 +6,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.ScheduleEntryMoveEvent;
@@ -22,7 +22,7 @@ import ec.edu.puce.professorCheck.modelo.Cita;
 import ec.edu.puce.professorCheck.servicio.ServicioCita;
 
 @ManagedBean(name = "citaCtrl")
-@ViewScoped
+@SessionScoped
 public class CitaCtrl extends BaseCtrl implements Serializable {
 
 	/**

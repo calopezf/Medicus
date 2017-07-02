@@ -34,7 +34,8 @@ public class ServicioPaciente implements Serializable {
 		sql.append("and paciente.email = mp.pk.emailPaciente \n");
 		sql.append("and mp.estado = 'ACT' \n");
 		if (StringUtils.isNotBlank(filtroNombres)) {
-			sql.append("and upper(paciente.nombre ||' '|| paciente.apellido) like ?1 \n");
+			sql.append("and (upper(paciente.nombre ||' '|| paciente.apellido) like ?1 \n");
+			sql.append("or upper(paciente.apellido ||' '|| paciente.nombre) like ?1) \n");
 		}
 		if (StringUtils.isNotBlank(filtroIdentificacion)) {
 			sql.append("and paciente.identificacion = ?2 \n");

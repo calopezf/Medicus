@@ -6,9 +6,9 @@
 	xmlns:pu="http://primefaces.org/ultima">
 
 
-<style>
+	<style>
 .img-circle {
-    border-radius: 50%;
+	border-radius: 50%;
 }
 </style>
 
@@ -18,7 +18,7 @@
 				<div class="nano-content menu-scroll-content">
 					<ui:fragment
 						rendered="#{guestPreferences.profileMode == 'inline' and guestPreferences.menuLayout != 'menu-layout-static menu-layout-horizontal'}">
-						
+
 						<div class="profile">
 							<div>
 								<h:outputText value="#{usuarioCtrl.currentDateObj}">
@@ -26,7 +26,8 @@
 								</h:outputText>
 							</div>
 							<div align="center">
-								<h:graphicImage value="/img/#{sesionCtrl.usuarioLogueado.foto}" styleClass="img-circle"
+								<h:graphicImage value="/img/#{sesionCtrl.usuarioLogueado.foto}"
+									styleClass="img-circle"
 									rendered="#{sesionCtrl.usuarioLogueado.foto!=null}"
 									style="width:70px; height:70px;" />
 							</div>
@@ -42,28 +43,43 @@
 					<pu:menu widgetVar="me">
 						<p:menuitem id="um_usuA" value="Usuarios" icon="&#xE7FD;"
 							rendered="#{usuarioCtrl.administrador}"
-							outcome="/paginas/usuarios/usuarioLista.jsf" />
+							outcome="/paginas/usuarios/usuarioLista.jsf">
+							<p:ajax listener="#{usuarioCtrl.removerBean}" />
+						</p:menuitem>
 						<p:menuitem id="um_conf" value="Configuración" icon="&#xE869;"
 							rendered="#{usuarioCtrl.administrador}"
-							outcome="/paginas/parametros/parametroLista.jsf" />
+							outcome="/paginas/parametros/parametroLista.jsf">
+							<p:ajax listener="#{usuarioCtrl.removerBean}" />
+						</p:menuitem>
 						<p:menuitem id="um_dashboard" value="Inicio" icon="&#xE871;"
-							outcome="/paginas/index.jsf" />
+							outcome="/paginas/index.jsf">
+							<p:ajax listener="#{usuarioCtrl.removerBean}" />
+						</p:menuitem>
 						<p:menuitem id="um_usu" value="Perfil" icon="&#xE7FD;"
 							rendered="#{usuarioCtrl.doctor}"
-							outcome="/paginas/usuarios/usuario.jsf" />
-						<p:menuitem id="um_mat" value="#{etiquetas['pacientes']}" icon="&#xE7FB;"
-							rendered="#{usuarioCtrl.doctor}"
-							outcome="/paginas/pacientes/paciente.jsf" />
+							outcome="/paginas/usuarios/usuario.jsf">
+							<p:ajax listener="#{usuarioCtrl.removerBean}" />
+						</p:menuitem>
+						<p:menuitem id="um_mat" value="#{etiquetas['pacientes']}"
+							icon="&#xE7FB;" rendered="#{usuarioCtrl.doctor}"
+							outcome="/paginas/pacientes/paciente.jsf">
+							<p:ajax listener="#{usuarioCtrl.removerBean}" />
+						</p:menuitem>
 						<p:menuitem id="um_seg" value="Agenda" icon="&#xE878;"
 							rendered="#{usuarioCtrl.doctor}"
-							outcome="/paginas/seguimiento/seguimientoLista.jsf" />
+							outcome="/paginas/seguimiento/seguimientoLista.jsf">
+							<p:ajax listener="#{usuarioCtrl.removerBean}" />
+						</p:menuitem>
 						<p:menuitem id="um_rep" value="Reportes" icon="&#xE5D2;"
 							rendered="#{usuarioCtrl.doctor}"
-							outcome="/paginas/reporte/reporte.jsf" />
+							outcome="/paginas/reporte/reporte.jsf">
+							<p:ajax listener="#{usuarioCtrl.removerBean}" />
+						</p:menuitem>
 						<p:menuitem id="um_utils" value="Configuración" icon="&#xE869;"
 							rendered="#{usuarioCtrl.doctor}"
-							outcome="/paginas/parametros/parametroLista.jsf" />
-
+							outcome="/paginas/parametros/parametroLista.jsf">
+							<p:ajax listener="#{usuarioCtrl.removerBean}" />
+						</p:menuitem>
 					</pu:menu>
 				</div>
 			</div>
